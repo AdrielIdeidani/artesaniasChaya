@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head>	
 <meta charset="utf-8">
 <title>Artesanias Chaya</title>
 <link href="Css/Inicio.css" rel="stylesheet" type="text/css"/>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="database.ProveedoresData" %>
+<%@ page import="entities.Proveedor" %>
+
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +21,10 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
+<a href="agregarProv.jsp"><button type="submit"  id="btnModificar" name="modificar">Añadir</button></a>
+
 <table class="table table-dark">
+
   <thead>
     <tr>
       <th scope="col">Cuit</th>
@@ -29,12 +37,24 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
     </tr>
   </thead>
   <tbody>
-	
-	
- 
+	<%
+	ProveedoresData pd= new ProveedoresData();
+	ArrayList<Proveedor> list = pd.getAll(session.getAttribute("usuario").toString()
+			,session.getAttribute("contra").toString()); 
+	for(Proveedor l: list){%>
+		<tr>
+			<td><%= l.getCuit() %></td>
+			<td><%= l.getRazonSocial() %></td>
+			<td><%= l.getTelefono() %></td>
+			<td><%= l.getDireccion() %></td>
+			<td><%= l.getEmail()%></td>
+			<td><a href="agregarProv.jsp"><button type="submit"  id="btnModificar" class="btnClass" value="<%=Integer.toString(l.getCuit())%>" name="modificar">Modificar</button></a></td>
 
- 
-    
+		</tr>
+	
+	<%} %>
+
+
     
   </tbody>
 </table>

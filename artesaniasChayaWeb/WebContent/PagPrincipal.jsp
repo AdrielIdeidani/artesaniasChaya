@@ -84,23 +84,23 @@ class="caret"></span></a>
                     </a>
                 </li>
                 <li>
-                    <a  target="iframeprincipal" href="nuevoProd.jsp">Agregar Nuevo Producto</a>
+                    <a  target="iframeprincipal" href="Productos/nuevoProd.jsp">Agregar Nuevo Producto</a>
                 </li>
                 <li>
-                    <a href="precios.jsp" target="iframeprincipal">Actualizar Precios </a>
+                    <a href="Productos/precios.jsp" target="iframeprincipal">Actualizar Precios </a>
                 </li>
                 <li>
-                    <a target="iframeprincipal" href="stocks.jsp">Ver Stocks</a>
+                    <a target="iframeprincipal" href="Productos/stocks.jsp">Ver Stocks</a>
                 </li>
                 <li>
                     <a target="iframeprincipal" href="ventas.jsp">Resumenes Ventas</a>
                 </li>
                
                 <li>
-                    <a href="modificar.jsp" target="iframeprincipal">Modificar Producto</a>
+                    <a href="Productos/modificarProd.jsp" target="iframeprincipal">Modificar Producto</a>
                 </li>
                 <li>
-                    <a href="proveedores.jsp" target="iframeprincipal">Proveedores</a>
+                    <a href="Proveedores/proveedores.jsp" target="iframeprincipal">Proveedores</a>
                 </li>
                  <li>
                     <a href="database.jsp" target="iframeprincipal" >Acceso DB</a>
