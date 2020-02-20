@@ -61,7 +61,8 @@ background: black;
 
 
 #page-content-wrapper {
-  width: auto;
+  min-width: 80%;
+   min-height: 80%;
   position: absolute;
   padding: 50px;
 }
@@ -70,7 +71,7 @@ background: black;
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -250px;
-  width:100%;
+  width:100%; 
 }
 
 
@@ -147,3 +148,15 @@ background: black;
     margin-right: 0px;
     margin-left: 0px;
 }
+
+#iframeprincipal{
+			position: relative;
+		    top:0;
+		    left: 0;
+		    width: 100%;
+		    min-height: 500px;/* 500px; */
+			/* max-height: 100%;500px; */
+		    margin:0px;
+		    border: 0px;	
+		    
+		}

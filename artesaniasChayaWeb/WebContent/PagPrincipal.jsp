@@ -56,7 +56,8 @@ class="caret"></span></a>
               <li><a href="../navbar-fixed-top/">Fixed top</a></li>
             </ul>
           </div>/.nav-collapse -->
-        </div><!--/.container-fluid -->
+        </div>
+        <!--/.container-fluid -->
       </nav>
 <!-- </div></div> -->
 
@@ -78,31 +79,31 @@ class="caret"></span></a>
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a target="iframeprincipal" href="Venta.jsp">
                        Venta
                     </a>
                 </li>
                 <li>
-                    <a href="#">Agregar Nuevo Producto</a>
+                    <a  target="iframeprincipal" href="nuevoProd.jsp">Agregar Nuevo Producto</a>
                 </li>
                 <li>
-                    <a href="#">Cambiar Precio Producto</a>
+                    <a href="precios.jsp" target="iframeprincipal">Actualizar Precios </a>
                 </li>
                 <li>
-                    <a href="#">Ver Stocks</a>
+                    <a target="iframeprincipal" href="stocks.jsp">Ver Stocks</a>
                 </li>
                 <li>
-                    <a href="#">Resumenes Ventas</a>
+                    <a target="iframeprincipal" href="ventas.jsp">Resumenes Ventas</a>
                 </li>
                
                 <li>
-                    <a href="#">Modificar Producto</a>
+                    <a href="modificar.jsp" target="iframeprincipal">Modificar Producto</a>
                 </li>
                 <li>
-                    <a href="#">Proveedores</a>
+                    <a href="proveedores.jsp" target="iframeprincipal">Proveedores</a>
                 </li>
                  <li>
-                    <a href="#">Acceso DB</a>
+                    <a href="database.jsp" target="iframeprincipal" >Acceso DB</a>
                 </li>
 		
 
@@ -115,11 +116,14 @@ class="caret"></span></a>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <h1>Simple Sidebar</h1>
+            <iframe name="iframeprincipal" id="iframeprincipal" >
+						<p>Este navegador no soparta iframes, intente visitar el sitio con otro navegador.</p>
+					</iframe>
+              <!--   <h1>Simple Sidebar</h1>
                 <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger 
 
 screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
 		<button id="menu-toggle" class="btn btn-secondary"><i id="toggleIcon" class="fa fa-angle-double-down"></i> Toggle Menu <i class="fa fa-
 
 filter"></i></button>                
