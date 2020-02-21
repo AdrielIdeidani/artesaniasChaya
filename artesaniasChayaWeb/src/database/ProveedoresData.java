@@ -35,6 +35,7 @@ ArrayList<Proveedor> provList =null;
 						prov.setDireccion(rs.getString("direccion"));
 						prov.setRazonSocial(rs.getString("razon_social"));
 						prov.setTelefono(rs.getString("telefono"));
+						prov.setEmail(rs.getString("mail"));
 						provList.add(prov);
 				}
 			rs.close();	

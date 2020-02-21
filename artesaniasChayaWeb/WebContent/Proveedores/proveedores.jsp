@@ -21,18 +21,24 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
-<a href="agregarProv.jsp"><button type="submit"  id="btnModificar" name="modificar">Añadir</button></a>
+<a href="agregarProv.jsp"><button type="submit" class="btn btn-secondary" id="btnModificar" name="modificar">Añadir</button></a>
 
-<table class="table table-dark">
-
+<table class="table table-dark" style="width:100%">
+	<col style="width:25%">
+	<col style="width:15%">
+	<col style="width:10%">
+	<col style="width:25%">
+	<col style="width:15%">
+	<col style="width:5%">
+	<col style="width:5%">
   <thead>
     <tr>
-      <th scope="col">Cuit</th>
-      <th scope="col">Razon Social</th>
+      <th scope="col" >Cuit</th>
+      <th scope="col" >Razon Social</th>
       <th scope="col">Telefono</th>
-      <th scope="col">Direccion</th>
-      <th scope="col">Email</th>
-      <th scope="col">Modificar</th>
+      <th scope="col" >Direccion</th>
+      <th scope="col" >Email</th>
+      <th scope="col" colspan="2" >Accion</th>
       
     </tr>
   </thead>
@@ -43,12 +49,13 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 			,session.getAttribute("contra").toString()); 
 	for(Proveedor l: list){%>
 		<tr>
-			<td><%= l.getCuit() %></td>
-			<td><%= l.getRazonSocial() %></td>
-			<td><%= l.getTelefono() %></td>
-			<td><%= l.getDireccion() %></td>
-			<td><%= l.getEmail()%></td>
-			<td><a href="agregarProv.jsp"><button type="submit"  id="btnModificar" class="btnClass" value="<%=Integer.toString(l.getCuit())%>" name="modificar">Modificar</button></a></td>
+			<td ><%= l.getCuit() %></td>
+			<td ><%= l.getRazonSocial() %></td>
+			<td ><%= l.getTelefono() %></td>
+			<td ><%= l.getDireccion() %></td>
+			<td ><%= l.getEmail()%></td>
+			<td ><a href="agregarProv.jsp"><button type="submit" class="btn btn-primary" id="btnModificar"  value="<%=Integer.toString(l.getCuit())%>" name="modificar">Modificar</button></a></td>
+			<td><button type="submit" class="btn btn-secondary" id="btnEliminar"  value="<%=Integer.toString(l.getCuit())%>" name="eliminar">Borrar</button></td>
 
 		</tr>
 	

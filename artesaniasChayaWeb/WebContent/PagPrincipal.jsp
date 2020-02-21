@@ -83,24 +83,28 @@ class="caret"></span></a>
                        Venta
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a  target="iframeprincipal" href="Productos/nuevoProd.jsp">Agregar Nuevo Producto</a>
+                </li> -->
+               
+                <li>
+                    <a href="Productos/listaProd.jsp" target="iframeprincipal">Productos</a>
                 </li>
                 <li>
                     <a href="Productos/precios.jsp" target="iframeprincipal">Actualizar Precios </a>
                 </li>
-                <li>
+         <!--        <li>
                     <a target="iframeprincipal" href="Productos/stocks.jsp">Ver Stocks</a>
-                </li>
-                <li>
-                    <a target="iframeprincipal" href="ventas.jsp">Resumenes Ventas</a>
-                </li>
+                </li> -->
                
                 <li>
-                    <a href="Productos/modificarProd.jsp" target="iframeprincipal">Modificar Producto</a>
+                    <a href="Proveedores/proveedores.jsp" target="iframeprincipal">Proveedores</a>
                 </li>
                 <li>
-                    <a href="Proveedores/proveedores.jsp" target="iframeprincipal">Proveedores</a>
+                    <a href="Productos/compraProd.jsp" target="iframeprincipal">Compra a Proveedores</a>
+                </li>
+                 <li>
+                    <a target="iframeprincipal" href="resumenVentas.jsp">Resumenes Ventas</a>
                 </li>
                  <li>
                     <a href="database.jsp" target="iframeprincipal" >Acceso DB</a>

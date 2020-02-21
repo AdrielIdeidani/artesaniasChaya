@@ -27,17 +27,31 @@ public class ProductosData {
 					user,contra);
 		
 			 prodList = new ArrayList<Producto>();
-				String query = "SELECT * FROM chaya.producto;";
+//				String query = "drop temporary table if exists tfecha;" +
+//				"create temporary table tfecha"+ 
+//				"select idProducto, max(fecha_desde) as fecha_desde from precios"+
+//				"	group by 1;"+
+//
+//				"drop temporary table if exists tprecio;"+
+//				"create temporary table tprecio"+
+//				"select t.idProducto, pro.descripcion,pro.stock,precio"+
+//				"from precios p"+
+//				"inner join tfecha t on p.idProducto = t.idProducto"+
+//				"inner join producto pro on pro.idProducto= p.idProducto"+
+//				"where p.fecha_desde = t.fecha_desde;"+
+//				 
+//				"select * from tprecio;";
+			 String query = "call preciosActuales();";
 				PreparedStatement pstmt = C.prepareStatement(query);
 				
 				rs = pstmt.executeQuery();
 					 
 				while(rs.next()) {
 						Producto prod = new Producto();
-						prod.setId(rs.getInt("idProductos"));
-						prod.setNombre(rs.getString("nombre"));
+						prod.setId(rs.getInt("idProducto"));
+						prod.setNombre(rs.getString("descripcion"));
 						prod.setPrecio(rs.getFloat("precio"));
-						prod.setStockIni(rs.getInt("stockIni"));
+						prod.setStock(rs.getInt("stock"));
 						prodList.add(prod);
 				}
 			rs.close();	//Si los saco de aca tira error, pero para mi no deberian aca e ir en el finally
@@ -48,5 +62,7 @@ public class ProductosData {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return prodList;
 	}
 }
