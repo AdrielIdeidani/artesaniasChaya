@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="database.ProductosData"%>
+<%@ page import="entities.Producto" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,12 +40,15 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
  
     <tr>
     <th scope="row"><input type="button" value="X"></th>
-    <th><input type="search" id="idSearch" name="idSearch"></th>
-    <th><input type="search" id="nombreSearch" name="nombreSearch"></th>
+    <th><input type="search" id="idSearch" name="idSearch" list="id"></th>
+    <th><input type="search" id="nombreSearch" name="nombreSearch" list="nombre"></th>
+
+    
     
     
   </tbody>
 </table>
+
 <div style="float:right">
 <button type="button" class="btn btn-dark">
 <label id="total" for="total" >Total : $ </label>
@@ -54,6 +60,27 @@ Agregar
 <label id="total" for="total" >0</label> -->
 
 <!-- <input type="submit" value="Agregar" onclick="arrays()"> -->
+ <datalist id="id">
+ <%
+	ProductosData pd= new ProductosData();
+	ArrayList<Producto> list = pd.getAll(session.getAttribute("usuario").toString()
+			,session.getAttribute("contra").toString()); 
+	for(Producto l: list){%>
+ 
+ 	<option value=<%=l.getId() %>>
+ 	<%} %>
 
+ </datalist>
+  <datalist id="nombre">
+ <%
+
+	for(Producto l: list) {%>
+ 
+ 	<option value= <%=l.getNombre() %>>
+ 	<%} %>
+
+ </datalist>
+ 
+ 
 </body>
 </html>

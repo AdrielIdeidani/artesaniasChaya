@@ -20,9 +20,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </head>
 <body>
 
-
-<form action="../ProductosServlet" method="post" >
 <a href="nuevoProd.jsp"><button type="submit" class="btn btn-secondary" id="btnModificar" name="modificar">Añadir</button></a>
+<form action="../ProductosServlet" method="get" >
 
 <table class="table table-dark">
   <thead>
@@ -47,9 +46,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 			<td ><%= l.getNombre() %></td>
 			<td ><%= l.getPrecio() %></td>
 			<td ><%= l.getStock() %></td>
-			
-			<td ><a href="agregarProv.jsp"><button type="submit" class="btn btn-primary" id="btnModificar"  value="<%=Integer.toString(l.getId())%>" name="modificar">Modificar</button></a></td>
-			<td><button type="submit" class="btn btn-secondary" id="btnEliminar"  value="<%=Integer.toString(l.getId())%>" name="eliminar">Borrar</button></td>
+			<td ><a href="agregarProv.jsp"><button type="submit" class="btn btn-primary" id="btnModificar" onclick="modificar()" value="<%=Integer.toString(l.getId())%>" name="modificar">Modificar</button></a></td>
+			<td><button type="submit" class="btn btn-secondary" id="btnEliminar" onclick="eliminar()" value="<%=Integer.toString(l.getId())%>" name="eliminar">Borrar</button></td>
 
 		</tr>
 	
@@ -62,7 +60,19 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
     
   </tbody>
 </table>
-
+<input type="hidden" id="auction" name="auction>">
 </form>
+<script>
+
+function modificar(){
+	
+	alert("ja");
+}
+
+function eliminar() {
+	
+	alert("ja");
+}
+</script>
 </body>
 </html>
