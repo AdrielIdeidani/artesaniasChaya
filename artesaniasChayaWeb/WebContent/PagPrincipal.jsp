@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="database.ProductosData" %>
+<%@ page import="entities.Producto" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +76,12 @@ class="caret"></span></a>
 </div> -->
 </div>
 
-
+<%
+ProductosData pd= new ProductosData();
+	ArrayList<Producto> list = pd.getAll(session.getAttribute("usuario").toString()
+			,session.getAttribute("contra").toString()); 
+	HttpSession  miSesion= request.getSession(false);
+	miSesion.setAttribute("productos", list);%>
 <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">

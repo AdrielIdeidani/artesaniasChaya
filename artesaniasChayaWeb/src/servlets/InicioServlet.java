@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.Producto;
 import logic.IniciarSesion;
 
 /**
@@ -39,6 +42,9 @@ public class InicioServlet extends HttpServlet {
 			miSesion.setAttribute("usuario", user);
 			miSesion.setAttribute("contra", contra);
 			response.sendRedirect("PagPrincipal.jsp");
+			ArrayList<Producto> prod = new ArrayList<Producto>();
+			miSesion.setAttribute("pedido", prod );
+
 		}
 		else
 			response.sendRedirect("ErrorInicio.jsp");

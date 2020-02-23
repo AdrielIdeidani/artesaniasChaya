@@ -20,13 +20,15 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
   Busqueda por Nombre: <input type="search" id="nombreSearch" name="nombreSearch">
 
 <form action="../ProductosServlet" method="post" >
+
+
 <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Precio</th>
-      <th scope="col">Cantidad Disponible</th>
+      <th scope="col">Ultima Actualizacion</th>
       <th scope="col">Modificar</th>
     </tr>
   </thead>

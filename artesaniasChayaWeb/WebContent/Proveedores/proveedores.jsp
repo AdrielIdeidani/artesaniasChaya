@@ -22,6 +22,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </head>
 <body>
 <a href="agregarProv.jsp"><button type="submit" class="btn btn-secondary" id="btnModificar" name="modificar">Añadir</button></a>
+<form action="../ProveedoresServlet" method="get" >
 
 <table class="table table-dark" style="width:100%">
 	<col style="width:25%">
@@ -49,7 +50,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 			,session.getAttribute("contra").toString()); 
 	for(Proveedor l: list){%>
 		<tr>
-			<td ><%= l.getCuit() %></td>
+			<td  class="colClass"><%= l.getCuit() %></td>
 			<td ><%= l.getRazonSocial() %></td>
 			<td ><%= l.getTelefono() %></td>
 			<td ><%= l.getDireccion() %></td>
@@ -65,5 +66,31 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
     
   </tbody>
 </table>
+<input type="hidden" id="auction" name="auction" value="">
+<input type="hidden" id="aux" name="aux" >
+</form>
 </body>
+<script>
+$(document).ready(function(){
+
+	$(".btn-secondary").click(function() {
+		 var $row = $(this).closest("tr");    // Find the row
+		  var $text = $row.find(".colClass").text(); // Find the text
+		 $('#aux').val($row.find(".colClass").text());
+		$('#auction').val("eliminar");
+
+		
+	})
+
+	$(".btn-primary").click(function() {
+		var $row = $(this).closest("tr");    // Find the row
+		var $text = $row.find(".colClass").text(); // Find the text
+		$('#aux').val($row.find(".colClass").text());
+		$('#auction').val("modificar");
+
+		
+	})
+	});
+
+</script>
 </html>

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ProveedoresServlet
@@ -41,7 +42,39 @@ public class ProveedoresServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String action = request.getParameter("auction");
+		HttpSession miSesion= request.getSession(false);
+		String user= miSesion.getAttribute("usuario").toString();
+		String contra =miSesion.getAttribute("contra").toString();
+		
+		if (action.contains("eliminar")) {
+			
+			
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+							user,contra);
+				 String query = "Delete from chaya.proveedor where cuitProveedor=?";
+					PreparedStatement pstmt = C.prepareStatement(query);
+					pstmt.setString(1, request.getParameter("aux") );
+
+					pstmt.executeUpdate();
+					pstmt.close();
+					
+				
+			}
+			catch (Exception e) {
+				System.out.println("Tira Error");
+
+			}
+			
+			response.sendRedirect("Proveedores/proveedores.jsp");
+		}//Fin del elimnar
+		else if (action.contains("modificar")) {
+			
+		}
+
 	}
 
 	/**

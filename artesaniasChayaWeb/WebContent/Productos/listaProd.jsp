@@ -34,20 +34,23 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
       <th scope="col">Eliminar</th>
     </tr>
   </thead>
-  <tbody>
+  <!-- <tbody> -->
 	
 	<%
 	ProductosData pd= new ProductosData();
 	ArrayList<Producto> list = pd.getAll(session.getAttribute("usuario").toString()
 			,session.getAttribute("contra").toString()); 
+	HttpSession  miSesion= request.getSession(false);
+	miSesion.setAttribute("productos", list);
+	
 	for(Producto l: list){%>
 		<tr>
-			<td ><%= l.getId() %></td>
+			<td class="colClass" ><%= l.getId() %></td>
 			<td ><%= l.getNombre() %></td>
 			<td ><%= l.getPrecio() %></td>
 			<td ><%= l.getStock() %></td>
-			<td ><a href="agregarProv.jsp"><button type="submit" class="btn btn-primary" id="btnModificar" onclick="modificar()" value="<%=Integer.toString(l.getId())%>" name="modificar">Modificar</button></a></td>
-			<td><button type="submit" class="btn btn-secondary" id="btnEliminar" onclick="eliminar()" value="<%=Integer.toString(l.getId())%>" name="eliminar">Borrar</button></td>
+			<td ><a href="agregarProv.jsp"><button type="submit" class="btn btn-primary" id="btnModificar"  name="modificar">Modificar</button></a></td>
+			<td><button type="submit" class="btn btn-secondary" id="btnEliminar"   name="eliminar">Borrar</button></td>
 
 		</tr>
 	
@@ -58,21 +61,36 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
  
     
     
-  </tbody>
-</table>
-<input type="hidden" id="auction" name="auction>">
+<!--   </tbody>
+ --></table>
+<input type="hidden" id="auction" name="auction" value="">
+<input type="hidden" id="aux" name="aux" >
+
 </form>
+
+</body>
 <script>
 
-function modificar(){
-	
-	alert("ja");
-}
+$(document).ready(function(){
 
-function eliminar() {
+$(".btn-secondary").click(function() {
+	 var $row = $(this).closest("tr");    // Find the row
+	  var $text = $row.find(".colClass").text(); // Find the text
+	 $('#aux').val($row.find(".colClass").text());
+	$('#auction').val("eliminar");
+
 	
-	alert("ja");
-}
+})
+
+$(".btn-primary").click(function() {
+	var $row = $(this).closest("tr");    // Find the row
+	var $text = $row.find(".colClass").text(); // Find the text
+	$('#aux').val($row.find(".colClass").text());
+	$('#auction').val("modificar");
+
+	
+})
+});
+
 </script>
-</body>
 </html>
