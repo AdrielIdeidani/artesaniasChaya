@@ -44,6 +44,7 @@ public class InicioServlet extends HttpServlet {
 			response.sendRedirect("PagPrincipal.jsp");
 			ArrayList<Producto> prod = new ArrayList<Producto>();
 			miSesion.setAttribute("pedido", prod );
+			miSesion.setAttribute("precios", prod );
 
 		}
 		else

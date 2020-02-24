@@ -42,7 +42,6 @@ ArrayList<Producto> ped =(ArrayList)miSesion.getAttribute("pedido");
 ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
 if(ped!=null){
 	
-
 		for(Producto l: ped){%>
 <tr>
     <td scope="row"><button type="submit" id="btnEliminar" class="btn btn-outline-danger" value=<%=Integer.toString(l.getId())%> name="eliminar">X</button></td>

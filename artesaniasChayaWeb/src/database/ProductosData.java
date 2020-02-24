@@ -27,20 +27,7 @@ public class ProductosData {
 					user,contra);
 		
 			 prodList = new ArrayList<Producto>();
-//				String query = "drop temporary table if exists tfecha;" +
-//				"create temporary table tfecha"+ 
-//				"select idProducto, max(fecha_desde) as fecha_desde from precios"+
-//				"	group by 1;"+
-//
-//				"drop temporary table if exists tprecio;"+
-//				"create temporary table tprecio"+
-//				"select t.idProducto, pro.descripcion,pro.stock,precio"+
-//				"from precios p"+
-//				"inner join tfecha t on p.idProducto = t.idProducto"+
-//				"inner join producto pro on pro.idProducto= p.idProducto"+
-//				"where p.fecha_desde = t.fecha_desde;"+
-//				 
-//				"select * from tprecio;";
+
 			 String query = "call preciosActuales();";
 				PreparedStatement pstmt = C.prepareStatement(query);
 				
@@ -52,9 +39,10 @@ public class ProductosData {
 						prod.setNombre(rs.getString("descripcion"));
 						prod.setPrecio(rs.getFloat("precio"));
 						prod.setStock(rs.getInt("stock"));
+						prod.setFecha_desde(rs.getDate("fecha_desde"));
 						prodList.add(prod);
 				}
-			rs.close();	//Si los saco de aca tira error, pero para mi no deberian aca e ir en el finally
+			rs.close();	
 			pstmt.close();
 			
 					

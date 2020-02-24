@@ -2,12 +2,27 @@ package entities;
 
 import java.sql.Date;
 
-public class Producto {
+public class ProductoConAumentoPrecio {
 	private int id, stock;
 	private String nombre;
 	private float precio;
 	private Date fecha_desde;
+	private float aumento;
+	private String modoAumento;
 	
+	
+	public float getAumento() {
+		return aumento;
+	}
+	public void setAumento(float aumento) {
+		this.aumento = aumento;
+	}
+	public String getModoAumento() {
+		return modoAumento;
+	}
+	public void setModoAumento(String modoAumento) {
+		this.modoAumento = modoAumento;
+	}
 	public Date getFecha_desde() {
 		return fecha_desde;
 	}
