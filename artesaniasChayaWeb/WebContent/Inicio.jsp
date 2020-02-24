@@ -22,6 +22,13 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 	<div class="card-body">
 	<form id="form1" method="get" action="InicioServlet">
+	<%
+	HttpSession  miSesion= request.getSession(false);
+
+	miSesion.removeAttribute("usuario");
+	miSesion.removeAttribute("contra");
+
+	%>
 	<div class="input-group form-group">
 		<div class="input-group-prepend">
 		<span class="input-group-text"><i class="fas fa-user"></i></span>

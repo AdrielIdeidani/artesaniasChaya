@@ -65,7 +65,7 @@ class="caret"></span></a>
 <!-- </div></div> -->
 
 <div class="row">
-<div class="col-lg-2"><a href="#">Back</a></div>
+<div class="col-lg-2"><a href="Inicio.jsp">Back</a></div>
 <!-- <div class="col-lg-auto"><input type="text" class="form-control" style="width:80%"/></div>
  --></div>
 

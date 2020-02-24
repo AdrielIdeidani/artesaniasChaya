@@ -70,7 +70,14 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 </body>
 <script>
+$(".btn-primary").click(function() {
+	var $row = $(this).closest("tr");    // Find the row
+	var $text = $row.find(".colClass").text(); // Find the text
+	$('#aux').val($row.find(".colClass").text());
+	$('#auction').val("modificar");
 
+	
+})
 $(document).ready(function(){
 
 $(".btn-secondary").click(function() {

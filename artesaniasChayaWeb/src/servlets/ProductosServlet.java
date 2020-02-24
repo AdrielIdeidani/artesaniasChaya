@@ -71,7 +71,8 @@ if (action.contains("eliminar")) {
 	response.sendRedirect("Productos/listaProd.jsp");
 }//Fin del elimnar
 else if (action.contains("modificar")) {
-	
+	response.sendRedirect("Productos/nuevoProd.jsp?idProducto="+request.getParameter("aux"));
+
 }
 		 
 }
@@ -87,6 +88,8 @@ else if (action.contains("modificar")) {
 		// TODO Auto-generated method stub
 		String user= request.getParameter("user");
 		String contra =request.getParameter("contra");
+		
+		if (request.getParameter("auction").contains("agregar")) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
@@ -107,6 +110,26 @@ else if (action.contains("modificar")) {
 		catch (Exception e) {
 			System.out.println("Tira Error");
 
+		}
+		}else if(request.getParameter("auction").contains("modificar")) {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+							user,contra);
+				 
+				 String query = "update chaya.producto set idProducto=?, descripcion=?,stock=? where idProducto=?;";
+					PreparedStatement pstmt = C.prepareStatement(query);
+					pstmt.setString(1, request.getParameter("id") );
+					pstmt.setString(2, request.getParameter("nombre"));
+					pstmt.setString(3, request.getParameter("stock"));
+					pstmt.setString(4, request.getParameter("aux") );
+
+					pstmt.executeUpdate();
+					pstmt.close();
+			}
+			catch (Exception e) {
+				
+			}
 		}
 		
 		response.sendRedirect("Productos/listaProd.jsp");

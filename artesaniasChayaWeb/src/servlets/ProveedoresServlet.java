@@ -72,6 +72,7 @@ public class ProveedoresServlet extends HttpServlet {
 			response.sendRedirect("Proveedores/proveedores.jsp");
 		}//Fin del elimnar
 		else if (action.contains("modificar")) {
+			response.sendRedirect("Proveedores/agregarProv.jsp?cuit="+request.getParameter("aux"));
 			
 		}
 
@@ -82,8 +83,11 @@ public class ProveedoresServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user= request.getParameter("user");
-		String contra =request.getParameter("contra");
+		HttpSession miSesion= request.getSession(false);
+		String user= miSesion.getAttribute("usuario").toString();
+		String contra =miSesion.getAttribute("contra").toString();
+if (request.getParameter("auction").contains("agregar")) {
+	
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -104,6 +108,31 @@ public class ProveedoresServlet extends HttpServlet {
 		catch (Exception e) {
 			
 		}
+}
+else if(request.getParameter("auction").contains("modificar")) {
+	try {
+		Class.forName("com.mysql.jdbc.Driver");
+		 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+					user,contra);
+		 
+		 String query = "update chaya.proveedor set cuitProveedor=?, telefono=?,direccion=?,razon_social=?, mail=? where cuitProveedor=?;";
+			PreparedStatement pstmt = C.prepareStatement(query);
+			pstmt.setString(1, request.getParameter("cuit") );
+			pstmt.setString(2, request.getParameter("telefono"));
+			pstmt.setString(3, request.getParameter("direccion"));
+			pstmt.setString(4, request.getParameter("razonSocial"));
+			pstmt.setString(5, request.getParameter("mail"));
+			pstmt.setString(6, request.getParameter("aux") );
+
+			pstmt.executeUpdate();
+			pstmt.close();
+	}
+	catch (Exception e) {
+		
+	}
+	
+}
+	
 		
 		response.sendRedirect("Proveedores/proveedores.jsp");
 	}

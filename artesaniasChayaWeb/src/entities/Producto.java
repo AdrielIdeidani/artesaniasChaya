@@ -1,7 +1,7 @@
 package entities;
 
 public class Producto {
-	private int id, stock, idProveedor;
+	private int id, stock;
 	private String nombre;
 	private float precio;
 	
@@ -18,12 +18,9 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public int getIdProveedor() {
-		return idProveedor;
-	}
-	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
-	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}

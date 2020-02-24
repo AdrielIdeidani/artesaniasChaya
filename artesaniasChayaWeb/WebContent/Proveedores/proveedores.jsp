@@ -48,6 +48,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 	ProveedoresData pd= new ProveedoresData();
 	ArrayList<Proveedor> list = pd.getAll(session.getAttribute("usuario").toString()
 			,session.getAttribute("contra").toString()); 
+	HttpSession miSesion= request.getSession(false);
+	miSesion.setAttribute("proveedores", list);
 	for(Proveedor l: list){%>
 		<tr>
 			<td  class="colClass"><%= l.getCuit() %></td>
@@ -64,7 +66,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 
     
-  </tbody>
+ </tbody>
 </table>
 <input type="hidden" id="auction" name="auction" value="">
 <input type="hidden" id="aux" name="aux" >

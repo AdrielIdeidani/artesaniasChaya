@@ -24,6 +24,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <label for="pedidoLabel">Nro Venta:</label>
 <label for="pedidoNro"></label>
 </div>
+<form  id="formVenta" action="VentaServlet" method="post">
 <table class="table table-dark">
   <thead>
     <tr>
@@ -44,17 +45,17 @@ if(ped!=null){
 
 		for(Producto l: ped){%>
 <tr>
-    <th scope="row"><input type="button" value="X"></th>
-    <th><%=l.getId() %></th>
-    <th><%=l.getNombre() %></th>
-    <th><%=l.getPrecio()%></th>
-    <th></th>
+    <td scope="row"><button type="submit" id="btnEliminar" class="btn btn-outline-danger" value=<%=Integer.toString(l.getId())%> name="eliminar">X</button></td>
+    <td class="colClass"><%=l.getId() %></td>
+    <td><%=l.getNombre() %></td>
+    <td><%=l.getPrecio()%></td>
+    <td></td>
     
 
 <%} }%>
  
     <tr>
-    <th scope="row"><input type="button" value="X"></th>
+    <th scope="row"></th>
     <th><input type="search" id="idSearch" name="idSearch" list="id" onChange="idBusqueda()" placeholder="Busqueda por Id"></th>
     <th><input type="search" id="nombreSearch" name="nombreSearch" list="nombre" placeholder="Busqueda por Nombre " onchange="nombreBusqueda()"></th>
 
@@ -71,6 +72,10 @@ if(ped!=null){
 Agregar
 </button>
 </div>
+<input type="hidden" id="auction" name="auction" value="">
+<input type="hidden" id="aux" name="aux" >
+
+</form>
 <!-- <label >Total : $</label> style="float:right"
 <label id="total" for="total" >0</label> -->
 
@@ -100,41 +105,30 @@ Agregar
 //SI POR EJEMPLO ESTOY ESCRIBIENDO EL CODIGO 11
 // Y DE LA NADA DEJO DE ESCRIBIR AHI Y ME PONGO A BUSCAR EL PRODUCTO POR LA DESCRIPCION 
 //VA A BUSCAR ALGUN PRODUCTO CON EL CODIGO 11 Y SI LO HAY LO AGREGA. CAMBIARLO
+
+$(".btn-outline-danger").click(function() {
+	
+	$('#auction').val("eliminar");
+	 var $row = $(this).closest("tr");    // Find the row
+	  var $text = $row.find(".colClass").text(); // Find the text
+	 $('#aux').val($row.find(".colClass").text());
+	document.getElementById("formVenta").submit();
+})
 function idBusqueda(){
 	
 
-	var inputVal = document.getElementById("idSearch").value;
+	$('#auction').val("id");
 	
-	<% 
-	for(Producto l: prod){
-		%>
-		if(<%= l.getId()%>== inputVal){
-			alert(<%=l.getId()%> );
-			<% ped.add(l);%>
-			location.reload();
-			
-			
-			
-		}
-		
-	<%} %>
+	document.getElementById("formVenta").submit();
 	
+
 	
 }
 function nombreBusqueda(){
-<%-- 	<%  ArrayList<Producto> ped =(ArrayList)miSesion.getAttribute("pedido");
+	$('#auction').val("nombre");
+	document.getElementById("formVenta").submit();
 	
-	ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
 
-	for(Producto l: prod){
-		if(l.getNombre()==)
-		
-	}
-	
-	%> --%>
-	
-	var inputVal = document.getElementById("nombreSearch").value;
-	alert(inputVal);
 }
 
 

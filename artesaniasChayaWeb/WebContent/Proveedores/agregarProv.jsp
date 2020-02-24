@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="entities.Proveedor" %>
+
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +21,41 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <body>
 <div>
 		<form action="../ProveedoresServlet" method="post" >
+		<%
+		String cuit = request.getParameter("cuit");
+		    if (cuit!=null){
+		    	HttpSession miSesion= request.getSession(false);
+		    	ArrayList<Proveedor> ped =(ArrayList)miSesion.getAttribute("proveedores");
+		    Proveedor prov=null;	
+		    for (Proveedor p:ped){
+		    	if(p.getCuit()==Integer.parseInt(cuit)){
+		    		prov=p;
+		    		break;
+
+		    	}
+		    	
+		    }
+		    
+		    %>
+<br>
+<h5 class="small">Cuit</h5>
+<input type="text" id="cuit" name="cuit" class="form-control" placeholder="Cuit" value=<%=prov.getCuit() %> >
+<br>
+<h5 class="small">Razon Social</h5>
+<input type="text" id="razonSocial" name="razonSocial" class="form-control" placeholder="Razon Social" value=<%=prov.getRazonSocial() %>>
+<br>
+<h5 class="small">Direccion</h5>
+<input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" value=<%=prov.getDireccion() %>>
+<br>
+<h5 class="small">Telefono</h5>
+<input type="text" id="telefono" class="form-control" name="telefono" placeholder="Telefono" value=<%=prov.getTelefono() %>>
+<br>
+<h5 class="small">Mail</h5>
+<input type="email" id="mail" class="form-control" name="mail" placeholder="Email" value=<%=prov.getEmail() %>>
+<br>
+<input type="hidden" id="auction" name="auction" value="modificar">
+<input type="hidden" id="aux" name="aux" value= <%=prov.getCuit() %>>
+<%} else {%>
 <br>
 <input type="text" id="cuit" name="cuit" class="form-control" placeholder="Cuit">
 <br>
@@ -29,10 +67,11 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <br>
 <input type="email" id="mail" class="form-control" name="mail" placeholder="Email">
 <br>
+<input type="hidden" id="auction" name="auction" value="agregar">
+
+<%} %>
 <input type="submit" class="btn btn-primary" id="agregar" value="Agregar" style="float:right">
 
-<input type="hidden" id="user" name="user" value=<%= session.getAttribute("usuario").toString()%> >
-<input type="hidden" name="contra" id="contra" value=<%= session.getAttribute("contra").toString()%> >
 
 </form>
 
