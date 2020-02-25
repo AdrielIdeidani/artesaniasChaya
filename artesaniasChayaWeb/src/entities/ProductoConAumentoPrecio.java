@@ -3,7 +3,7 @@ package entities;
 import java.sql.Date;
 
 public class ProductoConAumentoPrecio {
-	private int id, stock;
+	private int id;
 	private String nombre;
 	private float precio;
 	private Date fecha_desde;
@@ -35,12 +35,7 @@ public class ProductoConAumentoPrecio {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
+
 
 
 

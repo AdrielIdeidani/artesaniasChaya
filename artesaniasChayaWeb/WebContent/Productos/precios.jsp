@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@ page import="entities.Producto" %>
+ <%@ page import="entities.ProductoConAumentoPrecio" %>
+ <%@ page import="entities.Producto"%>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -31,26 +32,34 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
       <th scope="col">Nombre</th>
       <th scope="col">Precio</th>
       <th scope="col">Ultima Actualizacion</th>
-      <th scope="col">Modificar</th>
+      <th scope="col">Nuevo Valor</th>
     </tr>
   </thead>
   <tbody>
   
   <% HttpSession miSesion= request.getSession(false);
-ArrayList<Producto> precios =(ArrayList)miSesion.getAttribute("precios");
+ArrayList<ProductoConAumentoPrecio> precios =(ArrayList)miSesion.getAttribute("precios");
 ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
 if(precios!=null){
 	
-		for(Producto l: precios){%>
+		for(ProductoConAumentoPrecio l: precios){%>
 <tr>
     <td scope="row"><button type="submit" id="btnEliminar" class="btn btn-outline-danger" value=<%=Integer.toString(l.getId())%> name="eliminar">X</button></td>
     <td class="colClass"><%=l.getId() %></td>
-    <td><%=l.getNombre() %></td>
-    <td><%=l.getPrecio()%></td>
+    <td ><%=l.getNombre() %></td>
+    <td class="colPrecio"><%=l.getPrecio()%></td>
     <td><%= l.getFecha_desde()%></td>
-    <td><a href="cambioPrecio.jsp" target="iframeP">. </a></td>
+    <td><b><font color="green" ><%=l.getAumento() %></font></b>
+    <%-- <td ><button type="submit" class="btn btn-secondary"> <a href='cambioPrecio.jsp'  target=<%=l.getId() %> class="ref" ># </a></button></td>
+   <tr class="Frame">
+    <td class="colFrame" colspan="4"><iframe style="display:none" name=<%=l.getId() %> id=<%=l.getId() %> >
+
     
-</tr>>
+						<p>Este navegador no soparta iframes, intente visitar el sitio con otro navegador.</p>
+			</iframe>	</td>	 --%>
+			
+
+</tr>
 <%} }%>
 
   </tbody>
@@ -58,6 +67,7 @@ if(precios!=null){
 <input type="submit" class="btn btn-primary" id="agregar" value="Actualizar" style="float:right">
 <input type="hidden" id="auction" name="auction" value="">
 <input type="hidden" id="aux" name="aux" >
+
 </form>
 <!-- 
 con el buscador ya se de nombre o por el id del producto
@@ -87,11 +97,18 @@ y a cuanto quedarian. Que se hagan todas las actualizaciones juntas cuando haga 
  	<%} %>
 
  </datalist>
-  <iframe name="iframeP" id="iframeP" >
-						<p>Este navegador no soparta iframes, intente visitar el sitio con otro navegador.</p>
-					</iframe>
+  
 </body>
 <script>
+
+
+
+$(".btn-primary").click(function(){
+	$("#auction").val("actualizar");
+	
+	
+});
+
 
 
 $(".btn-outline-danger").click(function() {
