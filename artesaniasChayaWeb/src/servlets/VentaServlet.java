@@ -2,7 +2,12 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -13,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entities.Producto;
+import entities.ProductoConAumentoPrecio;
 
 /**
  * Servlet implementation class VentaServlet
@@ -42,7 +48,68 @@ public class VentaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession miSesion= request.getSession(false);
+		String user= miSesion.getAttribute("usuario").toString();
+		String contra =miSesion.getAttribute("contra").toString();
+		ArrayList<Producto> ped = (ArrayList) miSesion.getAttribute("pedido");
+//		System.out.println(request.getParameter("total"));
+//		System.out.println(request.getParameter("total"));
+//		System.out.println(request.getParameter("total"));
+//		System.out.println(request.getParameter("total"));
+		int idVenta=0;
+		float total = 0;
+		 DecimalFormat df = new DecimalFormat("#.##");
+		 for(Producto p:ped) {
+			 total = total + (p.getCant()*p.getPrecio());
+			 
+		 }
+
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+							user,contra);
+				 PreparedStatement pstmt = C.prepareStatement("insert into chaya.venta (total,fecha_hora) values (?,now())",
+							Statement.RETURN_GENERATED_KEYS);	
+System.out.println("Llega antes de poner el parametro");
+					//pstmt.setObject(1,request.getParameter("total")) ;
+					pstmt.setFloat(1,total );
+					
+System.out.println("llega dsp de poner el parametro");
+					pstmt.executeUpdate();
+					System.out.println("dsp del executeUpdate");
+					ResultSet rs = pstmt.getGeneratedKeys();	
+					System.out.println("dsp del get generated keys");
+					if(rs.next()) {
+						System.out.println("Pone el idVenta");
+					 idVenta= Integer.parseInt(rs.getString(1));
+					}
+		
+					String query = "insert into chaya.lineasventa values (?,?,?);";
+						for(Producto p: ped) {
+							if(idVenta!=0 &&p.getCant()>0) {
+								
+					
+
+							pstmt = C.prepareStatement(query);	
+							pstmt.setObject(1, idVenta );
+							pstmt.setObject(2, p.getId());
+							pstmt.setInt(3, p.getCant());
+							pstmt.executeUpdate();
+							}
+					}
+						pstmt.close();
+						ped.clear();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("error");						System.out.println("error");
+				System.out.println("error");
+				System.out.println("error");
+				System.out.println("error");
+
+			}
+
+	
 	}
 
 	/**
@@ -53,8 +120,6 @@ public class VentaServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("auction");
 		HttpSession miSesion= request.getSession(false);
-		String user= miSesion.getAttribute("usuario").toString();
-		String contra =miSesion.getAttribute("contra").toString();
 		ArrayList<Producto> ped = (ArrayList) miSesion.getAttribute("pedido");
 		boolean existe=false;
 		if(action.contains("id")){
@@ -122,10 +187,7 @@ public class VentaServlet extends HttpServlet {
 				 }
 				 
 			 }
-			 System.out.println(producto.getCant());
-			 System.out.println(producto.getCant());
-			 System.out.println(producto.getCant());
-
+	
 			 if(producto.getCant()>1) {
 				 producto.setCant(producto.getCant()-1);
  
@@ -136,6 +198,11 @@ public class VentaServlet extends HttpServlet {
 			 }
 
 		} //Final eliminar producto
+		else if (action.contains("entregar")) {
+		
+
+			doGet(request, response);
+		}
 		response.sendRedirect("Venta.jsp");
 
 	}

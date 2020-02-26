@@ -181,17 +181,10 @@ public class PreciosServlet extends HttpServlet {
 
 		}//Final eliminar producto
 		else if(action.contains("actualizar")) {
-			System.out.println("Llega al actualizar");
-			System.out.println("Llega al actualizar");
-			System.out.println("Llega al actualizar");
-			System.out.println("Llega al actualizar");
+		
 
 			if(prec.isEmpty()==false) {
-				System.out.println("esto nolo cumple");
-				System.out.println("esto nolo cumple");
-				System.out.println("esto nolo cumple");
-				System.out.println("esto nolo cumple");
-				System.out.println("esto nolo cumple");
+			
 
 				for(ProductoConAumentoPrecio p: prec) {
 					try {
@@ -199,12 +192,7 @@ public class PreciosServlet extends HttpServlet {
 						 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 									user,contra);
 						 String query = "insert into chaya.precios values(?,curdate(),?);";
-						 System.out.println("id: " + p.getId());
-						 System.out.println("id: " + p.getId());
-						 System.out.println("id: " + p.getId());
-						 System.out.println("aumento" + p.getAumento());
-						 System.out.println("aumento: " + p.getAumento());
-						 System.out.println("aumento: " + p.getAumento());
+						
 
 							PreparedStatement pstmt = C.prepareStatement(query);
 							pstmt.setInt(1, p.getId() );

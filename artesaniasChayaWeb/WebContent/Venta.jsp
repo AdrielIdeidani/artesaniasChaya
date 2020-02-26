@@ -82,7 +82,8 @@ Total : $
 </button>
 </div>
 <input type="hidden" id="auction" name="auction" value="">
-<input type="hidden" id="aux" name="aux" >
+<input type="hidden" id="aux" name="aux"  >
+<input type="hidden" id="total" name="total" value=<%=df.format(total)%>>
 
 </form>
 <!-- <label >Total : $</label> style="float:right"
@@ -115,6 +116,12 @@ Total : $
 // Y DE LA NADA DEJO DE ESCRIBIR AHI Y ME PONGO A BUSCAR EL PRODUCTO POR LA DESCRIPCION 
 //VA A BUSCAR ALGUN PRODUCTO CON EL CODIGO 11 Y SI LO HAY LO AGREGA. CAMBIARLO
 
+$(".btn-dark").click(function(){
+	$('#auction').val("entregar");
+	alert("Total: $" + $("#total").val())
+	document.getElementById("formVenta").submit();
+	
+})
 $(".btn-outline-danger").click(function() {
 	
 	$('#auction').val("eliminar");
