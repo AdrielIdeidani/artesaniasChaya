@@ -3,6 +3,7 @@
 <%@ page import="database.ProductosData"%>
 <%@ page import="entities.Producto" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@ if(ped!=null){
     <td class="colClass"><%=l.getId() %></td>
     <td><%=l.getNombre() %></td>
     <td><%=l.getPrecio()%></td>
-    <td></td>
+    <td><%=l.getCant() %></td>
     
 
 <%} }%>
@@ -65,10 +66,19 @@ if(ped!=null){
 </table>
 
 <div style="float:right">
+<%
+float total=0;
+for(Producto p:ped){
+	total = total + (p.getCant()*p.getPrecio());
+	
+}
+ DecimalFormat df = new DecimalFormat("#.##");%>
+
 <button type="button" class="btn btn-dark">
-<label id="total" for="total" >Total : $ </label>
-<label id="totalValor" for="totalValor">0</label>
-Agregar
+Total : $
+<%=df.format(total)%>
+<br>
+<b>Agregar</b>
 </button>
 </div>
 <input type="hidden" id="auction" name="auction" value="">

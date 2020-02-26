@@ -3,11 +3,22 @@ package entities;
 import java.sql.Date;
 
 public class Producto {
-	private int id, stock;
+	private int id, stock,cant;
+	
+
 	private String nombre;
 	private float precio;
 	private Date fecha_desde;
 	
+	public Producto() {
+		this.cant=1;
+	}
+	public int getCant() {
+		return cant;
+	}
+	public void setCant(int cant) {
+		this.cant = cant;
+	}
 	public Date getFecha_desde() {
 		return fecha_desde;
 	}

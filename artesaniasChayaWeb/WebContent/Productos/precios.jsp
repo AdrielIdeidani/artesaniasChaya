@@ -39,8 +39,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
   
   <% HttpSession miSesion= request.getSession(false);
 ArrayList<ProductoConAumentoPrecio> precios =(ArrayList)miSesion.getAttribute("precios");
-ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
-if(precios!=null){
+ ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
+ if(precios!=null){
 	
 		for(ProductoConAumentoPrecio l: precios){%>
 <tr>

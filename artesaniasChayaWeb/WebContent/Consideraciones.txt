@@ -1,0 +1,2 @@
+se bugea la parte de ventas cuando en el medio del pedido salgo a otra seccion y luego vuelvo a entrar. Deja agregar
+productos pero no borrarlos

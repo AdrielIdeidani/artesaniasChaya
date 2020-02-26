@@ -62,6 +62,7 @@ public class VentaServlet extends HttpServlet {
 			for(Producto p: ped) {
 				if(p.getId()==id) {
 					existe=true;
+					p.setCant(p.getCant()+1);
 					break;
 					
 					
@@ -85,6 +86,7 @@ public class VentaServlet extends HttpServlet {
 			String nombre = request.getParameter("nombreSearch");
 			for(Producto p: ped) {
 				if(p.getNombre().equals(nombre)) {
+					p.setCant(p.getCant()+1);
 					existe=true;
 					break;
 					
@@ -106,18 +108,32 @@ public class VentaServlet extends HttpServlet {
 
 	}//Fin busqueda por nombre
 		else if (action.contains("eliminar")) {
+		
 			HttpSession miSession= request.getSession(false);
 			 ped =(ArrayList)miSesion.getAttribute("pedido");
 			 ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
 			 Producto producto=null;
+
 			 for(Producto p:prod) {
 				 if (p.getId()==Integer.parseInt(request.getParameter("aux"))) {
+			
 					 producto=p;
 					 break;
 				 }
 				 
 			 }
-			 ped.remove(producto);
+			 System.out.println(producto.getCant());
+			 System.out.println(producto.getCant());
+			 System.out.println(producto.getCant());
+
+			 if(producto.getCant()>1) {
+				 producto.setCant(producto.getCant()-1);
+ 
+			 }
+			 else if (producto.getCant()==1) {
+				 ped.remove(producto);
+
+			 }
 
 		} //Final eliminar producto
 		response.sendRedirect("Venta.jsp");
