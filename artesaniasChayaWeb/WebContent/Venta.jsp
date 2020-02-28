@@ -13,12 +13,15 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper-utils.js" ></script>
+ 
 <link href="Css/PageInPanel.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 </head>
 <body>
 <div>
@@ -58,7 +61,9 @@ if(ped!=null){
     <th scope="row"></th>
     <th><input type="search" id="idSearch" name="idSearch" list="id" onChange="idBusqueda()" placeholder="Busqueda por Id"></th>
     <th><input type="search" id="nombreSearch" name="nombreSearch" list="nombre" placeholder="Busqueda por Nombre " onchange="nombreBusqueda()"></th>
-
+<td></td>
+<td></td>
+</tr>
     
     
     
@@ -118,8 +123,29 @@ Total : $
 
 $(".btn-dark").click(function(){
 	$('#auction').val("entregar");
-	alert("Total: $" + $("#total").val())
-	document.getElementById("formVenta").submit();
+	//bootbox.alert("Total: $" + $("#total").val());
+	var act;
+	bootbox.confirm({
+		title: "Confirmar Pedido",
+	    message: "Total $" + $("#total").val() ,
+	    buttons: {
+	        confirm: {
+	            label: 'Entregar',
+	            className: 'btn-success'
+	        },
+	        cancel: {
+	            label: 'Cancelar',
+	            className: 'btn-danger'
+	        }
+	    },
+	    callback: function (result) {
+	    	if(result) document.getElementById("formVenta").submit();
+	    	
+	      //  console.log('This was logged in the callback: ' + result);
+	    }
+	});
+	
+	
 	
 })
 $(".btn-outline-danger").click(function() {

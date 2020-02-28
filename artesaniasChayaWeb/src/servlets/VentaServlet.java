@@ -52,10 +52,7 @@ public class VentaServlet extends HttpServlet {
 		String user= miSesion.getAttribute("usuario").toString();
 		String contra =miSesion.getAttribute("contra").toString();
 		ArrayList<Producto> ped = (ArrayList) miSesion.getAttribute("pedido");
-//		System.out.println(request.getParameter("total"));
-//		System.out.println(request.getParameter("total"));
-//		System.out.println(request.getParameter("total"));
-//		System.out.println(request.getParameter("total"));
+
 		int idVenta=0;
 		float total = 0;
 		 DecimalFormat df = new DecimalFormat("#.##");
@@ -70,21 +67,17 @@ public class VentaServlet extends HttpServlet {
 							user,contra);
 				 PreparedStatement pstmt = C.prepareStatement("insert into chaya.venta (total,fecha_hora) values (?,now())",
 							Statement.RETURN_GENERATED_KEYS);	
-System.out.println("Llega antes de poner el parametro");
 					//pstmt.setObject(1,request.getParameter("total")) ;
 					pstmt.setFloat(1,total );
 					
-System.out.println("llega dsp de poner el parametro");
 					pstmt.executeUpdate();
-					System.out.println("dsp del executeUpdate");
 					ResultSet rs = pstmt.getGeneratedKeys();	
-					System.out.println("dsp del get generated keys");
 					if(rs.next()) {
 						System.out.println("Pone el idVenta");
 					 idVenta= Integer.parseInt(rs.getString(1));
 					}
 		
-					String query = "insert into chaya.lineasventa values (?,?,?);";
+					String query = "call lineaVentaStock(?,?,?);"; //Crea las lineas venta y actualiza stock
 						for(Producto p: ped) {
 							if(idVenta!=0 &&p.getCant()>0) {
 								
@@ -94,6 +87,7 @@ System.out.println("llega dsp de poner el parametro");
 							pstmt.setObject(1, idVenta );
 							pstmt.setObject(2, p.getId());
 							pstmt.setInt(3, p.getCant());
+						
 							pstmt.executeUpdate();
 							}
 					}

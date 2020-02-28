@@ -12,11 +12,15 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper-utils.js" ></script>
+ 
 <link href="Css/PageInPanel.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 </head>
 <body>
  
@@ -50,13 +54,7 @@ ArrayList<ProductoConAumentoPrecio> precios =(ArrayList)miSesion.getAttribute("p
     <td class="colPrecio"><%=l.getPrecio()%></td>
     <td><%= l.getFecha_desde()%></td>
     <td><b><font color="green" ><%=l.getAumento() %></font></b>
-    <%-- <td ><button type="submit" class="btn btn-secondary"> <a href='cambioPrecio.jsp'  target=<%=l.getId() %> class="ref" ># </a></button></td>
-   <tr class="Frame">
-    <td class="colFrame" colspan="4"><iframe style="display:none" name=<%=l.getId() %> id=<%=l.getId() %> >
-
-    
-						<p>Este navegador no soparta iframes, intente visitar el sitio con otro navegador.</p>
-			</iframe>	</td>	 --%>
+  
 			
 
 </tr>
