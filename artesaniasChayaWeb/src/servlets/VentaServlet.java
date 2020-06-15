@@ -117,7 +117,7 @@ public class VentaServlet extends HttpServlet {
 		ArrayList<Producto> ped = (ArrayList) miSesion.getAttribute("pedido");
 		boolean existe=false;
 		if(action.contains("id")){
-			int id = Integer.parseInt(request.getParameter("idSearch"));
+			String id = request.getParameter("idSearch");
 			for(Producto p: ped) {
 				if(p.getId()==id) {
 					existe=true;
@@ -174,7 +174,7 @@ public class VentaServlet extends HttpServlet {
 			 Producto producto=null;
 
 			 for(Producto p:prod) {
-				 if (p.getId()==Integer.parseInt(request.getParameter("aux"))) {
+				 if (p.getId()==request.getParameter("aux")) {
 			
 					 producto=p;
 					 break;

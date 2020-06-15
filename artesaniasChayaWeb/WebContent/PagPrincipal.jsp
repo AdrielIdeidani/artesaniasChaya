@@ -87,7 +87,7 @@ ProductosData pd= new ProductosData();
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a target="iframeprincipal" href="Venta.jsp">
+                    <a target="iframeprincipal" href="Venta/Venta.jsp">
                        Venta
                     </a>
                 </li>
@@ -106,17 +106,17 @@ ProductosData pd= new ProductosData();
                 </li> -->
                
                 <li>
-                    <a href="Proveedores/proveedores.jsp" target="iframeprincipal">Proveedores</a>
+                    <a href="Compradores/compradores.jsp" target="iframeprincipal">Compradores</a>
                 </li>
-                <li>
+          <!--       <li>
                     <a href="Productos/compraProd.jsp" target="iframeprincipal">Compra a Proveedores</a>
-                </li>
+                </li> -->
                  <li>
-                    <a target="iframeprincipal" href="resumenVentas.jsp">Resumenes Ventas</a>
+                    <a target="iframeprincipal" href="resumenVentas.jsp">Resumenes Facturas</a>
                 </li>
-                 <li>
+               <!--   <li>
                     <a href="database.jsp" target="iframeprincipal" >Acceso DB</a>
-                </li>
+                </li> -->
 		
 
 		
@@ -148,9 +148,9 @@ filter"></i></button>
  
 
 
-  <div class="footer">
+  <!-- <div class="footer">
     <p>Footer</p>
-  </div>
+  </div> -->
 <script>
 $("#menu-toggle").click(function(e) {
  e.preventDefault();

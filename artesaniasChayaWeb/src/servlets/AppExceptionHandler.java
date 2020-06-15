@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AppExceptionHandler
@@ -61,9 +62,18 @@ public class AppExceptionHandler extends HttpServlet {
               out.write("<li>Exception Message:"+throwable.getMessage()+"</li>");
               out.write("</ul>");
           }
-
+        HttpSession  miSesion = request.getSession(false);
+        miSesion.removeAttribute("usuario");
+        miSesion.removeAttribute("contra");
+        miSesion.removeAttribute("pedido");
+        miSesion.removeAttribute("productos");
+        miSesion.removeAttribute("precio");
+        miSesion.invalidate();
+          //Rompe todo si ejecuto este codigo
+          
           out.write("<br><br>");
-          out.write("<a href='Inicio.jsp\'>Home Page</a>");
+          out.write("<a href='../Inicio.jsp'>Home Page</a>");
           out.write("</body></html>");
+          response.sendRedirect("Inicio.jsp");
     }
 }

@@ -3,16 +3,11 @@
   <display-name>artesaniasChayaWeb</display-name>
   <welcome-file-list>
  	<welcome-file>Inicio.jsp</welcome-file>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+   
   </welcome-file-list>
   <error-page>
                <error-code> 404</error-code>
-               <location> /AppExceptionHandler</location >
+               <location> /ErrorRedirect.html </location > <!-- /"ErrorRedirect.html"  /AppExceptionHandler-->
         </error-page>
 
         <error-page>

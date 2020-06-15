@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logic.logicProductos;
+
 /**
  * Servlet implementation class ProductosServlet
  */
@@ -45,28 +47,12 @@ String action = request.getParameter("auction");
 HttpSession miSesion= request.getSession(false);
 String user= miSesion.getAttribute("usuario").toString();
 String contra =miSesion.getAttribute("contra").toString();
-
+logicProductos lp = new logicProductos();
 
 if (action.contains("eliminar")) {
+	String resultado=lp.borrar(user, contra, request.getParameter("aux"));
 	
 	
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-					user,contra);
-		 String query = "Delete from chaya.producto where idProducto=?";
-			PreparedStatement pstmt = C.prepareStatement(query);
-			pstmt.setString(1, request.getParameter("aux") );
-
-			pstmt.executeUpdate();
-			pstmt.close();
-			
-		
-	}
-	catch (Exception e) {
-		System.out.println("Tira Error");
-
-	}
 	
 	response.sendRedirect("Productos/listaProd.jsp");
 }//Fin del elimnar
@@ -86,50 +72,26 @@ else if (action.contains("modificar")) {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user= request.getParameter("user");
-		String contra =request.getParameter("contra");
 		
+		
+		
+		HttpSession miSesion= request.getSession(false);
+		String user= miSesion.getAttribute("usuario").toString();
+		String contra =miSesion.getAttribute("contra").toString();
+		logicProductos lp = new logicProductos();
 		if (request.getParameter("auction").contains("agregar")) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-						user,contra);
-			 
-			 String query = "call crearProd(?,?,?,?);";
-				PreparedStatement pstmt = C.prepareStatement(query);
-				pstmt.setString(1, request.getParameter("id") );
-				pstmt.setString(2, request.getParameter("nombre"));
-				pstmt.setString(3, request.getParameter("stock"));
-				pstmt.setString(4, request.getParameter("precio") );
-
-				pstmt.executeUpdate();
-				pstmt.close();
-				
+			String resultado= lp.agregar(user,contra,
+					request.getParameter("id"),Double.parseDouble(request.getParameter("precio")),
+					request.getParameter("nombre"),request.getParameter("empresa"),request.getParameter("categoria"));
+		
 			
-		}
-		catch (Exception e) {
-			System.out.println("Tira Error");
-
-		}
+			
 		}else if(request.getParameter("auction").contains("modificar")) {
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-							user,contra);
-				 
-				 String query = "update chaya.producto set idProducto=?, descripcion=?,stock=? where idProducto=?;";
-					PreparedStatement pstmt = C.prepareStatement(query);
-					pstmt.setString(1, request.getParameter("id") );
-					pstmt.setString(2, request.getParameter("nombre"));
-					pstmt.setString(3, request.getParameter("stock"));
-					pstmt.setString(4, request.getParameter("aux") );
-
-					pstmt.executeUpdate();
-					pstmt.close();
-			}
-			catch (Exception e) {
-				
-			}
+			
+			String resultado=lp.modificar(user,contra,
+					request.getParameter("id"),request.getParameter("nombre"),
+					request.getParameter("empresa"),request.getParameter("categoria"),request.getParameter("aux"));
+			
 		}
 		
 		response.sendRedirect("Productos/listaProd.jsp");

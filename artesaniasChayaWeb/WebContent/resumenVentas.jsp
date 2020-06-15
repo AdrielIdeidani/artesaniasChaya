@@ -18,14 +18,23 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <body>
 <form action ="reportesServlet" method="get">
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group mr-2" role="group" aria-label="First group">
-  	<h2>Ver ventas de: </h2>
-    <button type="button" class="btn btn-secondary">Hoy</button>
-    <button type="button" class="btn btn-secondary">7 Dias</button>
-    <button type="button" class="btn btn-secondary">Mes</button>
-    
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-secondary">1</button>
+  <button type="button" class="btn btn-secondary">2</button>
+
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" href="#">Dropdown link</a>
+      <a class="dropdown-item" href="#">Dropdown link</a>
+    </div>
   </div>
-  </div>
+</div>  	
+</div>
+  	
+
   </form>
 </body>
 </html>

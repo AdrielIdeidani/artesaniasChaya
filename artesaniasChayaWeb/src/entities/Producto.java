@@ -3,10 +3,22 @@ package entities;
 import java.sql.Date;
 
 public class Producto {
-	private int id, stock,cant;
+	private int cant;
 	
 
-	private String nombre;
+	private String nombre,id,categoria,empresa;
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	public String getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
 	private float precio;
 	private Date fecha_desde;
 	
@@ -25,17 +37,11 @@ public class Producto {
 	public void setFecha_desde(Date fecha_desde) {
 		this.fecha_desde = fecha_desde;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
 	}
 
 

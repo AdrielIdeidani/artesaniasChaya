@@ -3,8 +3,8 @@ package entities;
 import java.sql.Date;
 
 public class ProductoConAumentoPrecio {
-	private int id;
-	private String nombre;
+	
+	private String nombre,id;
 	private float precio;
 	private Date fecha_desde;
 	private float aumento;
@@ -29,10 +29,10 @@ public class ProductoConAumentoPrecio {
 	public void setFecha_desde(Date fecha_desde) {
 		this.fecha_desde = fecha_desde;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

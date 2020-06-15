@@ -155,9 +155,10 @@ background: black;
 		    top:0;
 		    left: 0;
 		    width: 100%;
-		    min-height: 500px;/* 500px; */
+		    min-height: 650px;/* 500px; */
 			/* max-height: 100%;500px; */
 		    margin:0px;
+		    margin-top:-80px;
 		    border: 0px;	
 		    
 		}

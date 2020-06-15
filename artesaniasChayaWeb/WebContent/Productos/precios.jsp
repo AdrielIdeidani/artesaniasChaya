@@ -14,7 +14,7 @@
   crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper-utils.js" ></script>
  
-<link href="Css/PageInPanel.css" rel="stylesheet" type="text/css"/>
+<link href="../Css/PageInPanel.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -25,8 +25,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <body>
  
 <form action="../PreciosServlet" id="formPrecio" method="post" >
-<input type="search" id="idSearch" name="idSearch" onChange="idBusqueda()" list="id" placeholder="Busqueda por Id">
- <input type="search" id="nombreSearch" list="nombre"  name="nombreSearch" placeholder="Busqueda por Nombre " onchange="nombreBusqueda()">
+<!-- <input type="search" id="idSearch" name="idSearch" onChange="idBusqueda()" list="id" placeholder="Busqueda por Id">
+<input type="search" id="nombreSearch" list="nombre"  name="nombreSearch" placeholder="Busqueda por Nombre " onchange="nombreBusqueda()"> -->
 
 <table class="table table-dark">
   <thead>
@@ -43,12 +43,12 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
   
   <% HttpSession miSesion= request.getSession(false);
 ArrayList<ProductoConAumentoPrecio> precios =(ArrayList)miSesion.getAttribute("precios");
- ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
- if(precios!=null){
+/* ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos"); */
+if(precios!=null){
 	
 		for(ProductoConAumentoPrecio l: precios){%>
 <tr>
-    <td scope="row"><button type="submit" id="btnEliminar" class="btn btn-outline-danger" value=<%=Integer.toString(l.getId())%> name="eliminar">X</button></td>
+    <td scope="row"><button type="submit" id="btnEliminar" class="btn btn-outline-danger" value=<%=l.getId()%> name="eliminar">X</button></td>
     <td class="colClass"><%=l.getId() %></td>
     <td ><%=l.getNombre() %></td>
     <td class="colPrecio"><%=l.getPrecio()%></td>
@@ -62,7 +62,10 @@ ArrayList<ProductoConAumentoPrecio> precios =(ArrayList)miSesion.getAttribute("p
 
   </tbody>
 </table>
-<input type="submit" class="btn btn-primary" id="agregar" value="Actualizar" style="float:right">
+
+
+<input type="submit" class="btn btn-primary" id="actualizar" value="Actualizar" style="float:right">
+<a href="seleccionarProductosCambioPrecio.jsp" class="btn btn-secondary" style="float:right">Agregar</a>
 <input type="hidden" id="auction" name="auction" value="">
 <input type="hidden" id="aux" name="aux" >
 
@@ -77,7 +80,7 @@ y a cuanto quedarian. Que se hagan todas las actualizaciones juntas cuando haga 
 
 
  -->
-  <datalist id="id">
+  <%-- <datalist id="id">
  <%
 
 	for(Producto l: prod){%>
@@ -94,7 +97,7 @@ y a cuanto quedarian. Que se hagan todas las actualizaciones juntas cuando haga 
  	<option value= <%=l.getNombre() %>>
  	<%} %>
 
- </datalist>
+ </datalist> --%>
   
 </body>
 <script>

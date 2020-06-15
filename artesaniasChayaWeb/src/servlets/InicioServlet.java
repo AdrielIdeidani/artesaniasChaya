@@ -24,10 +24,6 @@ public class InicioServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InicioServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,13 +38,12 @@ public class InicioServlet extends HttpServlet {
 			HttpSession miSesion = request.getSession(true);
 			miSesion.setAttribute("usuario", user);
 			miSesion.setAttribute("contra", contra);
-			response.sendRedirect("PagPrincipal.jsp");
 			ArrayList<Producto> prod = new ArrayList<Producto>();
 			ArrayList<ProductoConAumentoPrecio> pr = new ArrayList<ProductoConAumentoPrecio>();
-			
+			miSesion.setMaxInactiveInterval(900);//15 min antes de invalidad la sesion
 			miSesion.setAttribute("pedido", prod );
 			miSesion.setAttribute("precios", pr );
-			miSesion.setAttribute("pedido", prod );
+			response.sendRedirect("PagPrincipal.jsp");
 
 
 		}

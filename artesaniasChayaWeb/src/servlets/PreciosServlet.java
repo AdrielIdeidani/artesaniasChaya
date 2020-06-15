@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
+import database.ProductosData;
 import entities.Producto;
 import entities.ProductoConAumentoPrecio;
+import logic.logicProductos;
 
 /**
  * Servlet implementation class PreciosServlet
@@ -51,7 +55,7 @@ public class PreciosServlet extends HttpServlet {
 		String modo=request.getParameter("radio");
 		HttpSession miSesion= request.getSession(false);
 		ArrayList<ProductoConAumentoPrecio> prec = (ArrayList) miSesion.getAttribute("precios");
-	int id =Integer.parseInt(request.getParameter("id"));
+	String id =request.getParameter("id");
 	Float precioActual =Float.parseFloat(request.getParameter("precioActual"));
 	
 	for (ProductoConAumentoPrecio p:prec) {
@@ -59,7 +63,8 @@ public class PreciosServlet extends HttpServlet {
 			if(modo.contains("cantidad")) {
 		
 				p.setAumento(precioActual+Float.parseFloat(request.getParameter("textCantidad")));
-			} else if (modo.contains("total")) {
+			}
+			else if (modo.contains("total")) {
 				p.setAumento(Float.parseFloat(request.getParameter("textTotal")));
 				
 			}
@@ -85,143 +90,102 @@ public class PreciosServlet extends HttpServlet {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-
-		String action = request.getParameter("auction");
 		HttpSession miSesion= request.getSession(false);
 		String user= miSesion.getAttribute("usuario").toString();
 		String contra =miSesion.getAttribute("contra").toString();
-
-		ArrayList<ProductoConAumentoPrecio> prec = (ArrayList) miSesion.getAttribute("precios");
-		ArrayList<Producto> prod = (ArrayList) miSesion.getAttribute("productos");
-		ProductoConAumentoPrecio prodABorrar=null;
-		boolean existe=false;
-		if(action.contains("id")){
-			int id = Integer.parseInt(request.getParameter("idSearch"));
-			if(prec!=null) {
-			for(ProductoConAumentoPrecio p: prec) {//controlo que el producto no este ya dentro
-				if(p.getId()==id) {
-					existe=true;
-					break;
-							}
-						
-			}
-			}
-			if (existe==false) {
-				ProductoConAumentoPrecio pCAP= new ProductoConAumentoPrecio();
-
-				for(Producto pr:prod) {
-					if(pr.getId()==id) {//como no esta agrego el producto correspondiente
-						pCAP.setId(pr.getId());
-						pCAP.setPrecio(pr.getPrecio());
-						pCAP.setNombre(pr.getNombre());
-						pCAP.setFecha_desde(pr.getFecha_desde());
-						prec.add(pCAP);
-						break;
-					}
-					
-				}
-				String dir="Productos/cambioPrecio.jsp?id="+pCAP.getId()+"&precio="+pCAP.getPrecio()
-				+"&nombre="+pCAP.getNombre()+"&fecha="+pCAP.getFecha_desde();
-				response.sendRedirect(dir);
-
+		
+				
+		String action = request.getParameter("auction");
+		logicProductos lp= new logicProductos();
+		
+		System.out.println(action);
+		if(action.contains("actualizar")) {
+			ArrayList<ProductoConAumentoPrecio> actualizar = (ArrayList) miSesion.getAttribute("precios");
+			String resultado =null;
+			 resultado= lp.actualizarPrecios(user, contra, actualizar);
+			if(resultado==null) {
+				ArrayList<ProductoConAumentoPrecio> prec = new ArrayList<ProductoConAumentoPrecio>();
+				miSesion.setAttribute("precios", prec);
 			}
 			
 			
 		}
-		else 	if(action.contains("nombre")){
-			String nombre = request.getParameter("nombreSearch");
-			for(ProductoConAumentoPrecio p: prec) {
-				if(p.getNombre().equals(nombre)) {
-					existe=true;
+		else if (action.contains("eliminar")){
+			ArrayList<ProductoConAumentoPrecio> eliminar = (ArrayList) miSesion.getAttribute("precios");
+			String aux = request.getParameter("aux");
+			for(ProductoConAumentoPrecio pr:eliminar) {
+				if (pr.getId().equals(aux)) {
+					eliminar.remove(pr);
 					break;
-					
-					
 				}
-						
+				
 			}
-			if (existe==false) {
-				ProductoConAumentoPrecio pCAP= new ProductoConAumentoPrecio();
-				for(Producto pr:prod) {
-					if(pr.getNombre().equals(nombre)) {
-						
-						pCAP.setId(pr.getId());
-						pCAP.setPrecio(pr.getPrecio());
-						pCAP.setNombre(pr.getNombre());
-						pCAP.setFecha_desde(pr.getFecha_desde());
-						prec.add(pCAP);
-						break;
-
-						//break;
-						
-					}
-					
-				}
-		
-
-				String dir="Productos/cambioPrecio.jsp?id="+pCAP.getId()+"&precio="+pCAP.getPrecio()
-				+"&nombre="+pCAP.getNombre()+"&fecha="+pCAP.getFecha_desde();
-				response.sendRedirect(dir);
-
-			}
-
-	}//Fin busqueda por nombre
-		else if (action.contains("eliminar")) {
-			 Producto producto=null;
-			 for(ProductoConAumentoPrecio p:prec) {
-				 if (p.getId()==Integer.parseInt(request.getParameter("aux"))) {
-					  prodABorrar = p;
-					
-					 break;
-				 }
-				 
-			 }
-			 prec.remove(prodABorrar);
-				response.sendRedirect("Productos/precios.jsp");
-
-		}//Final eliminar producto
-		else if(action.contains("actualizar")) {
-		
-
-			if(prec.isEmpty()==false) {
+			miSesion.setAttribute("precios", eliminar);
 			
-
-				for(ProductoConAumentoPrecio p: prec) {
+			
+			
+			
+		}
+		else {
+			String id= request.getParameter("idsHidden");
+			ArrayList<ProductoConAumentoPrecio> prec = (ArrayList) miSesion.getAttribute("precios");
+			
+			
+			
+			String[] ids =	id.split("\\s*,\\s*");
+			System.out.println(ids[0]);
+			
+			String radio = request.getParameter("radio");
+			String aumento ;
+			ArrayList<ProductoConAumentoPrecio> prods=null;
+			if(radio.equals("cantidad")) {
+			
+				
 					try {
-						Class.forName("com.mysql.jdbc.Driver");
-						 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-									user,contra);
-						 String query = "insert into chaya.precios values(?,curdate(),?);";
-						
-
-							PreparedStatement pstmt = C.prepareStatement(query);
-							pstmt.setInt(1, p.getId() );
-							pstmt.setFloat(2, p.getAumento());
-
-							pstmt.executeUpdate();
-							pstmt.close();
+						prods = lp.asignarNuevosPreciosCantidad(user, contra, ids,request.getParameter("textCantidad"));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					catch (Exception e) {
-						System.out.println("error");						System.out.println("error");
-						System.out.println("error");
-						System.out.println("error");
-						System.out.println("error");
+			
+			
+			
+			
+			
+			
+			} else if (radio.equals("total")) {
+			System.out.println("total : " + request.getParameter("textTotal"));
+			System.out.println("total : " + request.getParameter("textTotal"));
+			System.out.println("total : " + request.getParameter("textTotal"));
+			System.out.println("total : " + request.getParameter("textTotal"));
 
-					}
-					
-					
-					
-				}
-			prec.clear();
+			try {
+				prods = lp.asignarNuevosPreciosTotal(user, contra, ids,request.getParameter("textTotal"));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 				
-				
+			}else if (radio.equals("porcentaje")) {
+			
+			try {
+				prods = lp.asignarNuevosPreciosPorcentaje(user, contra, ids,request.getParameter("textPorcentaje"));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 				
 			}
 			
-			response.sendRedirect("Productos/precios.jsp");
+			for (ProductoConAumentoPrecio p:prods) {
+				prec.add(p);
+			}
+			miSesion.setAttribute("precios", prec );
 
 		}
-				
+		
+		response.sendRedirect("Productos/precios.jsp");
+//		
 
 		
 	}

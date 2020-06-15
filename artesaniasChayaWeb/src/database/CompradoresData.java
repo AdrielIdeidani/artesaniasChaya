@@ -6,44 +6,44 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
-import entities.Producto;
-import entities.ProductoConAumentoPrecio;
+import entities.Comprador;
 
-public class ProductosData {
+public class CompradoresData {
 	Connection C = null;
 	ResultSet rs=null;
 	PreparedStatement pstmt=null;
 	
 	
-	public ArrayList<Producto> getAll(String user, String contra) throws SQLException {
-		ArrayList<Producto> prodList =null;
+	public ArrayList<Comprador> getAll(String user, String contra) throws SQLException {
+		ArrayList<Comprador> compList =null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 					user,contra);
 		
-			 prodList = new ArrayList<Producto>();
+			 compList = new ArrayList<Comprador>();
 
-			 String query = "call preciosActuales();";
+			 String query = "select * from comprador where baja is null or baja ='0';";
 				PreparedStatement pstmt = C.prepareStatement(query);
 				
 				rs = pstmt.executeQuery();
 					 
 				while(rs.next()) {
-						Producto prod = new Producto();
-						prod.setId(rs.getString("idProducto"));
-						prod.setPrecio(rs.getFloat("precio"));
-						prod.setNombre(rs.getString("descripcion"));
-						prod.setFecha_desde(rs.getDate("fecha_desde"));
-						prod.setCategoria(rs.getString("codigo"));
-						prod.setEmpresa(rs.getString("nombre"));
-						prodList.add(prod);
+						Comprador comp = new Comprador();
+						comp.setId(rs.getInt("idComprador"));
+						comp.setTelefono(rs.getString("telefono"));
+						comp.setNombre(rs.getString("nombre"));
+						comp.setMail(rs.getString("mail"));
+						comp.setDireccion(rs.getString("direccion"));
+						comp.setLocalidad(rs.getString("localidad"));
+						comp.setProvincia(rs.getString("provincia"));
+				
+						compList.add(comp);
 				}
 			rs.close();	
 			pstmt.close();
@@ -54,32 +54,38 @@ public class ProductosData {
 			e.printStackTrace();
 		}
 		
-		return prodList;
+		return compList;
 	}
 	
-	public ArrayList<ProductoConAumentoPrecio> getAllConAumentoPrecio(String user, String contra, String[] ids) throws SQLException {
-		ArrayList<ProductoConAumentoPrecio> prodList =null;
+	
+	
+	
+	public Comprador getOne(String user, String contra, String id) throws SQLException {
 		
+		Comprador comp = new Comprador();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 					user,contra);
 		
-			 prodList = new ArrayList<ProductoConAumentoPrecio>();
+			 
 
-			 String query = "call preciosActuales();";
+			 String query = "select * from comprador where idComprador=?;";
 				PreparedStatement pstmt = C.prepareStatement(query);
-				
+				pstmt.setString(1,id );
 				rs = pstmt.executeQuery();
 					 
-				while(rs.next() && Arrays.asList(ids).contains(rs.getString("idProducto"))) {
-						ProductoConAumentoPrecio prod = new ProductoConAumentoPrecio();
-						prod.setId(rs.getString("idProducto"));
-						prod.setPrecio(rs.getFloat("precio"));
-						prod.setNombre(rs.getString("descripcion"));
-						prod.setFecha_desde(rs.getDate("fecha_desde"));
+				while(rs.next()) {
 						
-						prodList.add(prod);
+						comp.setId(rs.getInt("idComprador"));
+						comp.setTelefono(rs.getString("telefono"));
+						comp.setNombre(rs.getString("nombre"));
+						comp.setMail(rs.getString("mail"));
+						comp.setDireccion(rs.getString("direccion"));
+						comp.setLocalidad(rs.getString("localidad"));
+						comp.setProvincia(rs.getString("provincia"));
+				
+						
 				}
 			rs.close();	
 			pstmt.close();
@@ -90,8 +96,6 @@ public class ProductosData {
 			e.printStackTrace();
 		}
 		
-		return prodList;
+		return comp;
 	}
-	
-	
 }
