@@ -62,13 +62,13 @@ public class AppExceptionHandler extends HttpServlet {
               out.write("<li>Exception Message:"+throwable.getMessage()+"</li>");
               out.write("</ul>");
           }
-        HttpSession  miSesion = request.getSession(false);
-        miSesion.removeAttribute("usuario");
-        miSesion.removeAttribute("contra");
-        miSesion.removeAttribute("pedido");
-        miSesion.removeAttribute("productos");
-        miSesion.removeAttribute("precio");
-        miSesion.invalidate();
+//        HttpSession  miSesion = request.getSession(false);
+//        miSesion.removeAttribute("usuario");
+//        miSesion.removeAttribute("contra");
+//        miSesion.removeAttribute("pedido");
+//        miSesion.removeAttribute("productos");
+//        miSesion.removeAttribute("precio");
+//        miSesion.invalidate();
           //Rompe todo si ejecuto este codigo
           
           out.write("<br><br>");

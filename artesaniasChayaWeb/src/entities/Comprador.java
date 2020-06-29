@@ -1,15 +1,16 @@
 package entities;
 
 public class Comprador {
-	private int id;
-	private String nombre,mail,direccion,localidad,provincia,telefono;
+	private int cuit;
+	private String nombre,mail,direccion,localidad,provincia,telefono,codigoPostal;
 	
 	
-	public int getId() {
-		return id;
+	
+	public int getCuit() {
+		return cuit;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCuit(int cuit) {
+		this.cuit = cuit;
 	}
 	public String getTelefono() {
 		return telefono;
@@ -25,6 +26,13 @@ public class Comprador {
 	}
 	public String getMail() {
 		return mail;
+	}
+
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
 	}
 	public void setMail(String mail) {
 		this.mail = mail;

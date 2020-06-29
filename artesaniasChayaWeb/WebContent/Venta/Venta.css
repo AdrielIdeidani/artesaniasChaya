@@ -1,3 +1,5 @@
+/* @import url("/artesaniasChayaWeb/WebContent/Css/PageInPanel.css");
+ */
 body{
 /* 	overflow: hidden !important;
  */}
@@ -97,8 +99,8 @@ table.dataTable thead .sorting_desc_disabled:before {
 	
 
 }	
-table#tablaProds{
-	background-color: red;}
+/* table#tablaProds{
+	background-color: red;} */
 
 /* table#tablaProds {
 	width:200px;
@@ -110,9 +112,18 @@ table#tablaProds{
 } */
 .my-custom-scrollbar {
 position: relative;
-height: 200px;
+height: 400px;
 overflow: auto;
 }
 .table-wrapper-scroll-y {
 display: block;
 } 
+
+button#btnEliminar{
+font-size: 10px;
+}
+
+input[type=number]{
+    width: 60px;
+/*     color: blue;
+ */}

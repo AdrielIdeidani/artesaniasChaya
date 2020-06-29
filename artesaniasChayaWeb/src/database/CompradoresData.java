@@ -35,12 +35,14 @@ public class CompradoresData {
 					 
 				while(rs.next()) {
 						Comprador comp = new Comprador();
-						comp.setId(rs.getInt("idComprador"));
+						comp.setCodigoPostal(rs.getString("codigoPostal"));
+						comp.setCuit(rs.getInt("cuit"));
 						comp.setTelefono(rs.getString("telefono"));
 						comp.setNombre(rs.getString("nombre"));
 						comp.setMail(rs.getString("mail"));
 						comp.setDireccion(rs.getString("direccion"));
 						comp.setLocalidad(rs.getString("localidad"));
+						
 						comp.setProvincia(rs.getString("provincia"));
 				
 						compList.add(comp);
@@ -70,17 +72,18 @@ public class CompradoresData {
 		
 			 
 
-			 String query = "select * from comprador where idComprador=?;";
+			 String query = "select * from comprador where cuit=?;";
 				PreparedStatement pstmt = C.prepareStatement(query);
 				pstmt.setString(1,id );
 				rs = pstmt.executeQuery();
 					 
 				while(rs.next()) {
 						
-						comp.setId(rs.getInt("idComprador"));
 						comp.setTelefono(rs.getString("telefono"));
 						comp.setNombre(rs.getString("nombre"));
 						comp.setMail(rs.getString("mail"));
+						comp.setCodigoPostal(rs.getString("codigoPostal"));
+						comp.setCuit(rs.getInt("cuit"));
 						comp.setDireccion(rs.getString("direccion"));
 						comp.setLocalidad(rs.getString("localidad"));
 						comp.setProvincia(rs.getString("provincia"));

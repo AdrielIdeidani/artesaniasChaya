@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.Comprador;
 import entities.Producto;
 import entities.ProductoConAumentoPrecio;
 import logic.IniciarSesion;
@@ -39,7 +40,9 @@ public class InicioServlet extends HttpServlet {
 			miSesion.setAttribute("usuario", user);
 			miSesion.setAttribute("contra", contra);
 			ArrayList<Producto> prod = new ArrayList<Producto>();
+			String cuit = "0";			
 			ArrayList<ProductoConAumentoPrecio> pr = new ArrayList<ProductoConAumentoPrecio>();
+			miSesion.setAttribute("comprador", cuit);
 			miSesion.setMaxInactiveInterval(900);//15 min antes de invalidad la sesion
 			miSesion.setAttribute("pedido", prod );
 			miSesion.setAttribute("precios", pr );

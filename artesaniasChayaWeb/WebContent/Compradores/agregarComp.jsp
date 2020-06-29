@@ -24,6 +24,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 		<form action="../CompradoresServlet" method="post" >
 		<%	
 		String idComprador = request.getParameter("idComprador");
+		
+
 		    if (idComprador!=null){
 		    	HttpSession miSesion= request.getSession(false);
 		    	CompradoresData cd= new CompradoresData();
@@ -33,8 +35,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 		    
 		    %>
 <br>
-<h5 class="small">Id</h5>
-<input type="text" id="id" name="id" class="form-control" placeholder="Id" value=<%=comp.getId() %> >
+<h5 class="small">Cuit/Cuil</h5>
+<input type="text" id="id" name="id" class="form-control" placeholder="Id"  value=<%=comp.getCuit() %> >
 <br>
 <h5 class="small">Nombre</h5>
 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value="<%=comp.getNombre() %>">
@@ -43,10 +45,13 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" value="<%=comp.getDireccion() %>">
 <br>
 <h5 class="small">Localidad</h5>
-<input type="text" id="localidad" name="localidad" class="form-control" placeholder="Direccion" value="<%=comp.getLocalidad() %>">
+<input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" value="<%=comp.getLocalidad() %>">
+<br>
+<h5 class="small">Codigo Postal</h5>
+<input type="text" id="codigoPostal" class="form-control" name="codigoPostal" placeholder="Codigo Postal" value="<%=comp.getCodigoPostal() %>">
 <br>
 <h5 class="small">Provincia</h5>
-<input type="text" id="provincia" name="provincia" class="form-control" placeholder="Direccion" value="<%=comp.getProvincia() %>">
+<input type="text" id="provincia" name="provincia" class="form-control" placeholder="Provincia" value="<%=comp.getProvincia() %>">
 <br>
 <h5 class="small">Telefono</h5>
 <input type="text" id="telefono" class="form-control" name="telefono" placeholder="Telefono" value="<%=comp.getTelefono() %>">
@@ -55,18 +60,20 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <input type="email" id="mail" class="form-control" name="mail" placeholder="Email" value="<%=comp.getMail() %>">
 <br>
 <input type="hidden" id="auction" name="auction" value="modificar">
-<input type="hidden" id="aux" name="aux" value= "<%=comp.getId() %>">
+<input type="hidden" id="aux" name="aux" value= "<%=comp.getCuit() %>">
 <input type="submit" class="btn btn-primary" id="agregar" value="Actualizar" style="float:right">
 
 <%} else {%>
-<!-- <br>
+<br>
 <input type="text" id="id" name="id" class="form-control" placeholder="Cuit">
-<br> -->
+<br> 
 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
 <br>
 <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion">
 <br>
 <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad">
+<br>
+<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" placeholder="Codigo Postal">
 <br>
 <input type="text" id="provincia" name="provincia" class="form-control" placeholder="Provincia">
 <br>

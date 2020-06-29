@@ -38,7 +38,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 	<col style="width:3%">
   <thead>
     <tr>
-      <th scope="col" >Id</th>
+      <th scope="col" >Cuit/Cuil</th>
       <th scope="col" >Nombre</th>
       <th scope="col"> Telefono</th>
       <th scope="col" >Mail</th>
@@ -56,13 +56,13 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 	miSesion.setAttribute("compradores", list);
 	for(Comprador l: list){%>
 		<tr>
-			<td  class="colClass"><%= l.getId() %></td>
+			<td  class="colClass"><%= l.getCuit() %></td>
 			<td ><%= l.getNombre() %></td>
 			<td ><%= l.getTelefono() %></td>
 			<td ><%= l.getMail() %></td>
 			<td ><%= l.getDireccion() +", " + l.getLocalidad() + ", "+ l.getProvincia()%> </td>
-			<td ><a href="agregarProv.jsp"><button type="submit" class="btn btn-primary" id="btnModificar"  value="<%= Integer.toString(l.getId()) %>" name="modificar">Modificar</button></a></td>
-			<td><button type="submit" class="btn btn-secondary" id="btnEliminar"  value="<%=Integer.toString(l.getId())%>" name="eliminar">Borrar</button></td>
+			<td ><button type="submit" class="btn btn-primary" id="btnModificar"   name="modificar">Modificar</button></td>  <%-- value="<%= Integer.toString(l.getId()) %>" --%>
+			<td><button type="submit" class="btn btn-secondary" id="btnEliminar"  name="eliminar">Borrar</button></td>
 
 		</tr>
 	
@@ -78,6 +78,24 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </body>
 <script>
 
+$(".btn-secondary").click(function() {
+	 var $row = $(this).closest("tr");    // Find the row
+	  var $text = $row.find(".colClass").text(); // Find the text
+	 $('#aux').val($row.find(".colClass").text());
+	$('#auction').val("eliminar");
+
+	
+})
+
+$(".btn-primary").click(function() {
+	var $row = $(this).closest("tr");    // Find the row
+	var $text = $row.find(".colClass").text(); // Find the text
+	$('#aux').val($row.find(".colClass").text());
+	$('#auction').val("modificar");
+
+	
+})
+
 $(document).ready(function(){
 	$('#dtBasicExample').DataTable();
 	$('.dataTables_length').addClass('bs-select');
@@ -91,23 +109,7 @@ $(document).ready(function(){
 
 
 
-	$(".btn-secondary").click(function() {
-		 var $row = $(this).closest("tr");    // Find the row
-		  var $text = $row.find(".colClass").text(); // Find the text
-		 $('#aux').val($row.find(".colClass").text());
-		$('#auction').val("eliminar");
-
-		
-	})
-
-	$(".btn-primary").click(function() {
-		var $row = $(this).closest("tr");    // Find the row
-		var $text = $row.find(".colClass").text(); // Find the text
-		$('#aux').val($row.find(".colClass").text());
-		$('#auction').val("modificar");
-
-		
-	})
+	
 	});
 
 </script>

@@ -238,6 +238,7 @@ $('.dataTables_length').addClass('bs-select');
 });
 $(document).ready(function() {
     $('#tabla').DataTable( {
+    	 "scrollY": '500px',
         "paging":   false,
         //"ordering": false,
         "info":     false

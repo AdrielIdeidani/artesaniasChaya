@@ -3,6 +3,8 @@
 <%@ page import="entities.Producto" %>
 <%@ page import="database.CategoriaData" %>
 <%@ page import="database.EmpresaData" %>
+<%@ page import="database.ProductosData" %>
+
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -34,15 +36,17 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 			
 		String idProducto = request.getParameter("idProducto");
 		    if (idProducto!=null){
+		    	ProductosData pd2= new ProductosData();
 		    	HttpSession miSesion= request.getSession(false);
-		    	ArrayList<Producto> pro =(ArrayList)miSesion.getAttribute("productos");
+		    	ArrayList<Producto> pro = pd2.getAll(session.getAttribute("usuario").toString()
+						,session.getAttribute("contra").toString());
 		    Producto prod=null;	
 		    for (Producto p:pro){
-		    	if(p.getId()==idProducto){
-		    	
-		    	}
+		    	if(p.getId().equals(idProducto)){
+
 		    		prod=p;
 		    		break;
+		    	}
 
 		    	}
 		    ArrayList<String> listCategoriaExcept = pd.getAllExceptOne(session.getAttribute("usuario").toString()
