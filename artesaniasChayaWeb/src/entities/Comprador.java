@@ -1,15 +1,16 @@
 package entities;
 
 public class Comprador {
-	private int cuit;
+	private long cuit;
 	private String nombre,mail,direccion,localidad,provincia,telefono,codigoPostal;
 	
 	
 	
-	public int getCuit() {
+
+	public long getCuit() {
 		return cuit;
 	}
-	public void setCuit(int cuit) {
+	public void setCuit(long cuit) {
 		this.cuit = cuit;
 	}
 	public String getTelefono() {

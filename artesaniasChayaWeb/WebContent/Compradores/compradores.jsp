@@ -29,11 +29,11 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <form action="../CompradoresServlet" method="get" >
 
 <table id="tabla" class="table table-striped table-bordered table-sm" style="width:100%">
-	<col style="width:3%">
+	<col style="width:13%">
+	<col style="width:19%">
+	<col style="width:9%">
 	<col style="width:22%">
-	<col style="width:10%">
-	<col style="width:23%">
-	<col style="width:35%">
+	<col style="width:30%">
 	<col style="width:4%">
 	<col style="width:3%">
   <thead>
@@ -56,11 +56,11 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 	miSesion.setAttribute("compradores", list);
 	for(Comprador l: list){%>
 		<tr>
-			<td  class="colClass"><%= l.getCuit() %></td>
+			<td  class="colClass"> <%= l.getCuit() %></td> 
 			<td ><%= l.getNombre() %></td>
 			<td ><%= l.getTelefono() %></td>
 			<td ><%= l.getMail() %></td>
-			<td ><%= l.getDireccion() +", " + l.getLocalidad() + ", "+ l.getProvincia()%> </td>
+			<td ><%= l.getDireccion() +", " + l.getLocalidad() + " " + l.getCodigoPostal() +", "+ l.getProvincia()%> </td>
 			<td ><button type="submit" class="btn btn-primary" id="btnModificar"   name="modificar">Modificar</button></td>  <%-- value="<%= Integer.toString(l.getId()) %>" --%>
 			<td><button type="submit" class="btn btn-secondary" id="btnEliminar"  name="eliminar">Borrar</button></td>
 

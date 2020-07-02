@@ -37,7 +37,7 @@ public class logicPedidos {
 				
 				if(rs.next()) {
 				idPedido=rs.getInt(1);
-				
+				resultado= String.valueOf(idPedido);
 				}
 
 
@@ -59,7 +59,7 @@ public class logicPedidos {
 		
 		
 		} catch (SQLException e) {
-			resultado=e.getMessage();
+			resultado="-1";
 			e.printStackTrace();
 		}
 		

@@ -67,7 +67,7 @@ public class CompradoresServlet extends HttpServlet {
 			
 		}
 		else if (auction.contains("cambiarCompradorANulo")) {
-			String cuit="0";
+			String cuit="-1"; //-1 o 0
 			miSesion.setAttribute("comprador", cuit);
 			response.sendRedirect("Venta/Venta.jsp?cuit="+request.getParameter("cuit")+"&nombre="+
 			request.getParameter("nombre")+"&telefono="+

@@ -17,9 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.CompradoresData;
 import entities.Comprador;
+import entities.Presupuesto;
 import entities.Producto;
 import entities.ProductoConAumentoPrecio;
+import logic.PresupuestoPDF;
+import logic.logicComprador;
 import logic.logicPedidos;
 
 /**
@@ -49,61 +53,7 @@ public class VentaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		HttpSession miSesion= request.getSession(false);
-//		String user= miSesion.getAttribute("usuario").toString();
-//		String contra =miSesion.getAttribute("contra").toString();
-//		ArrayList<Producto> ped = (ArrayList) miSesion.getAttribute("pedido");
-//
-//		int idVenta=0;
-//		float total = 0;
-//		 DecimalFormat df = new DecimalFormat("#.##");
-//		 for(Producto p:ped) {
-//			 total = total + (p.getCant()*p.getPrecio());
-//			 
-//		 }
-//
-//			try {
-//				Class.forName("com.mysql.jdbc.Driver");
-//				 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-//							user,contra);
-//				 PreparedStatement pstmt = C.prepareStatement("insert into chaya.venta (total,fecha_hora) values (?,now())",
-//							Statement.RETURN_GENERATED_KEYS);	
-//					//pstmt.setObject(1,request.getParameter("total")) ;
-//					pstmt.setFloat(1,total );
-//					
-//					pstmt.executeUpdate();
-//					ResultSet rs = pstmt.getGeneratedKeys();	
-//					if(rs.next()) {
-//						System.out.println("Pone el idVenta");
-//					 idVenta= Integer.parseInt(rs.getString(1));
-//					}
-//		
-//					String query = "call lineaVentaStock(?,?,?);"; //Crea las lineas venta y actualiza stock
-//						for(Producto p: ped) {
-//							if(idVenta!=0 &&p.getCant()>0) {
-//								
-//					
-//
-//							pstmt = C.prepareStatement(query);	
-//							pstmt.setObject(1, idVenta );
-//							pstmt.setObject(2, p.getId());
-//							pstmt.setInt(3, p.getCant());
-//						
-//							pstmt.executeUpdate();
-//							}
-//					}
-//						pstmt.close();
-//						ped.clear();
-//			}
-//			catch (Exception e) {
-//				e.printStackTrace();
-//				System.out.println("error");						System.out.println("error");
-//				System.out.println("error");
-//				System.out.println("error");
-//				System.out.println("error");
-//
-//			}
+
 
 	
 	}
@@ -115,7 +65,7 @@ public class VentaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("auctionVenta");
-
+		logicComprador lc = new logicComprador();
 		HttpSession miSesion= request.getSession(false);
 		String user= miSesion.getAttribute("usuario").toString();
 		String contra =miSesion.getAttribute("contra").toString();
@@ -124,16 +74,21 @@ public class VentaServlet extends HttpServlet {
 		 logicPedidos lp = new logicPedidos();
 
 		 String nombre,cuit,direccion,telefono,mail,localidad,provincia,codigoPostal;
-		boolean existe=false;
 
-		cuit= request.getParameter("cuit");
-		nombre =request.getParameter("nombre");
-		direccion=request.getParameter("direccion");
-		telefono=request.getParameter("telefono");
-		mail=request.getParameter("mail");
-		localidad=request.getParameter("localidad");
-		provincia=request.getParameter("provincia");
-		codigoPostal=request.getParameter("codigoPostal");
+		cuit= request.getParameter("cuitHidden");
+		nombre =request.getParameter("nombreHidden");
+		direccion=request.getParameter("direccionHidden");
+		telefono=request.getParameter("telefonoHidden");
+		mail=request.getParameter("mailHidden");
+		localidad=request.getParameter("localidadHidden");
+		provincia=request.getParameter("provinciaHidden");
+		codigoPostal=request.getParameter("codigoPostalHidden");
+		System.out.println("cuit");
+		System.out.println(cuit);
+		System.out.println(cuit);
+		System.out.println(cuit);
+		System.out.println(cuit);
+		System.out.println(cuit);
 
 		String cantidades= request.getParameter("cantsHidden");
 
@@ -171,16 +126,37 @@ public class VentaServlet extends HttpServlet {
 
 		} //Final eliminar producto
 		else if (action.contains("entregar")) {
-			 cuit = miSesion.getAttribute("comprador").toString();
-
-
-			if (cuit.contentEquals("-1")) {
+			String aux = miSesion.getAttribute("comprador").toString();
+			 String nroComprador;
+	
+			if (aux.contentEquals("-1") ) {
+				String base ="9999";
+				nroComprador = base.concat(cuit);
+				String resultado= lc.agregarNulo(user, contra,
+						nroComprador,nombre,telefono,mail, direccion, localidad, codigoPostal, provincia);
+				
 				System.out.println("Equal -1 (agregado a mano)");
 
 
 			}
 			else {
-				System.out.println("Hay un comprador!");
+				nroComprador= cuit;
+				CompradoresData cd = new CompradoresData();
+				try {
+					Comprador comp = cd.getOne(user, contra, nroComprador);
+					nombre=comp.getNombre();
+					telefono=comp.getTelefono();
+					mail=comp.getMail();
+					direccion=comp.getDireccion();
+					localidad=comp.getLocalidad();
+					codigoPostal=comp.getCodigoPostal();
+					provincia=comp.getProvincia();
+					System.out.println("Hay un comprador!");
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			
@@ -205,7 +181,9 @@ public class VentaServlet extends HttpServlet {
 		}
 		else if (radio.equals("total")) {
 			descuento =Double.parseDouble(request.getParameter("textTotal"));
+			double auxDcto=total;
 			total=descuento;
+			descuento=auxDcto-descuento;
 		}
 		else if (radio.equals("porcentaje")) {
 			descuento =Double.parseDouble(request.getParameter("textPorcentaje"));
@@ -214,8 +192,24 @@ public class VentaServlet extends HttpServlet {
 		}
 		
 	
-		String resultado = lp.entregar(user,contra,ped,descuento,total,"1");
-		if(resultado ==null) {
+		String resultado = lp.entregar(user,contra,ped,descuento,total,nroComprador);
+		if(Integer.parseInt(resultado)>-1 ) {
+			Presupuesto pres = new Presupuesto();
+			pres.setNro(Integer.parseInt(resultado));
+			pres.setNombre(nombre);
+			pres.setCodigoPostal(codigoPostal);
+			pres.setCuit(nroComprador);
+			pres.setDireccion(direccion);
+			pres.setLocalidad(localidad);
+			pres.setMail(mail);
+			pres.setProvincia(provincia);
+			pres.setTelefono(telefono);
+			pres.setSubtotal(total);
+			pres.setDescuento(descuento);
+			pres.setProds(ped);
+			PresupuestoPDF p = new PresupuestoPDF();
+			p.crear(pres);
+			
 			ped.clear();
 			miSesion.setAttribute("pedido", ped);
 			

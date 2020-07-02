@@ -99,6 +99,34 @@ public class logicComprador {
 
 		return resultado;
 	}
-	
+	public String agregarNulo(String user, String contra, String id,String nombre,String telefono
+			,String mail,String direccion,String localidad, String codigoPostal,String provincia)  {
+		resultado=null;
+		try {
+				
+			 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+						user,contra);
+			 String query = "insert into chaya.comprador (cuit,nombre,telefono,mail,direccion,localidad,codigoPostal,provincia,baja) values (?,?,?,?,?,?,?,?,1);";
+				PreparedStatement pstmt = C.prepareStatement(query);
+				
+				pstmt.setInt(1, Integer.parseInt(id));
+				pstmt.setString(2, nombre);
+				pstmt.setString(3, telefono);
+				pstmt.setString(4, mail);
+				pstmt.setString(5, direccion);
+				pstmt.setString(6, localidad);
+				pstmt.setString(7, codigoPostal);
+				pstmt.setString(8, provincia);
+				
+				pstmt.executeUpdate();
+				pstmt.close();
+				C.close();
+			} catch (SQLException e) {
+				resultado=e.getMessage();
+				e.printStackTrace();
+			}
+
+		return resultado;
+	}
 
 }

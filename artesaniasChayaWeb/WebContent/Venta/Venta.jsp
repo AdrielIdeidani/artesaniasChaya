@@ -50,11 +50,16 @@ ArrayList<Producto> listP = pd2.getAll(session.getAttribute("usuario").toString(
 %>
 <%
 HttpSession miSesion= request.getSession(false);
-	      String id = request.getParameter("id");
+	     /*  String id = request.getParameter("id"); */
 CompradoresData pd= new CompradoresData();
 
 String cuit = miSesion.getAttribute("comprador").toString();
 String nombreText,cuitText,telefonoText,mailText,direccionText,localidadText,provinciaText,codigoText;
+System.out.println(cuit);
+System.out.println(cuit);
+System.out.println(cuit);
+System.out.println(cuit);
+
 //Apenas carga o cuando ponemos en un comprador vacio
 
 /* if (request.getParameter("cuit").toString()!=""){
@@ -96,25 +101,59 @@ else{
 	 codigoText=c.getCodigoPostal();
 	
 }
-miSesion.setAttribute("comprador", "-1");
+
 ArrayList<Comprador> list = pd.getAll(session.getAttribute("usuario").toString()
 		,session.getAttribute("contra").toString());   %>
-		    <%-- if (id!=null){ %> --%>
+		
+<%
+if (cuit.equals("0")){
+%>
 <select class="form-control" onChange="compradorSelect(this)">
+<option value="comprador" >Comprador:</option>
+<%		for (Comprador comp:list){		%>
+<option value="<%=comp.getCuit()%>"><%=comp.getNombre() %></option>
+<%} %>
+<option value="comprador" >-----</option>
+
+</select>
+<%
+}else if (cuit.equals("-1")){
+%>
+<select class="form-control" onChange="compradorSelect(this)">
+<option >Agregando Comprador</option>
+<%		for (Comprador comp:list){		%>
+<option value="<%=comp.getCuit()%>"><%=comp.getNombre() %></option>
+<%} %>
+<!-- <option value="comprador" >-----</option>
+ --></select>
+<%} else{ %>
+
+<select class="form-control" onChange="compradorSelect(this)">
+<option value="<%=request.getParameter("nombre") %>"><%=request.getParameter("nombre") %></option>
+
+<%		for (Comprador comp:list){		%>
+<option value="<%=comp.getCuit() %>"><%=comp.getNombre() %></option>
+<%} %>
+<option value="comprador" >Otro</option>
+</select>
+
+
+<%} %>
+<%-- <select class="form-control" onChange="compradorSelect(this)">
 <option value="<%=request.getParameter("nombre") %>"><%=request.getParameter("nombre") %></option>
 
 <%		for (Comprador comp:list){		%>
 <option value="<%=comp.getCuit()%>"><%=comp.getNombre() %></option>
 <%} %>
 <option value="comprador" >----</option>
-</select>
+</select> --%>
 </div>
 <%-- <%} %> --%>
 <br>
 <div class="row" >
 <div class="col">
 <label for="nombre">Nombre:</label>
-<input type="text" id="nombre" name="nombre" class="form-control" value="<%= nombreText%>"  placeholder="<%= nombreText%>"> <!-- request.getParameter("nombre") -->
+<input type="text" id="nombre" name="nombre" class="form-control" value="<%= nombreText %>"  placeholder="<%= nombreText%>"> <!-- request.getParameter("nombre") -->
 </div>
 <div class="col">
 <label for="cuit">Cuit/Cuil:</label>
@@ -318,7 +357,7 @@ if(ped!=null){
 <%} }%>
  
  <tr>
- <td colspan="2"><input type="button" data-toggle="modal" onclick="mostrar()" data-target="#myModal" value="Agregar Productos" id="agregarProds" name="agregarProds"></td>
+ <td colspan="2"><input type="button" class="btn btn-secondary" data-toggle="modal" onclick="mostrar()" data-target="#myModal" value="Agregar Productos" id="agregarProds" name="agregarProds"></td>
  </tr>
     
     
@@ -376,7 +415,7 @@ if(ped!=null){
 $(document).ready(function() {
 	
 	var value = "<%=cuit%>" ;
-	if(value>0){
+	if(value>-1){
 
 		$("#nombre").prop("readonly", true);
 		$("#cuit").prop("readonly", true);
@@ -504,7 +543,14 @@ function cantidades(){
 		document.querySelector('#ShowButton').value = total;
   
 		}, 0);
-
+	$('#cuitHidden').val(document.getElementById('cuit').value);
+	$('#nombreHidden').val(document.getElementById('nombre').value);
+	$('#telefonoHidden').val(document.getElementById('telefono').value);
+	$('#mailHidden').val(document.getElementById('mail').value);
+	$('#direccionHidden').val(document.getElementById('direccion').value);
+	$('#localidadHidden').val(document.getElementById('localidad').value);
+	$('#provinciaHidden').val(document.getElementById('provincia').value);
+	$('#codigoPostalHidden').val(document.getElementById('codigoPostal').value);
 	//alert(total);
 	//alert(cants);
 } 
@@ -532,15 +578,15 @@ $('.dataTables_length').addClass('bs-select'); */
 
 function entregar(){
 	
-	
-		$('#cuitHidden').val(document.getElementById('cuit').value);
-		$('#nombreHidden').val(document.getElementById('nombre').value);
-		$('#telefonoHidden').val(document.getElementById('telefono').value);
-		$('#mailHidden').val(document.getElementById('mail').value);
-		$('#direccionHidden').val(document.getElementById('direccion').value);
-		$('#localidadHidden').val(document.getElementById('localidad').value);
-		$('#provinciaHidden').val(document.getElementById('provincia').value);
-		$('#codigoPostalHidden').val(document.getElementById('codigoPostal').value);
+
+	$('#cuitHidden').val(document.getElementById('cuit').value);
+	$('#nombreHidden').val(document.getElementById('nombre').value);
+	$('#telefonoHidden').val(document.getElementById('telefono').value);
+	$('#mailHidden').val(document.getElementById('mail').value);
+	$('#direccionHidden').val(document.getElementById('direccion').value);
+	$('#localidadHidden').val(document.getElementById('localidad').value);
+	$('#provinciaHidden').val(document.getElementById('provincia').value);
+	$('#codigoPostalHidden').val(document.getElementById('codigoPostal').value);
 		
 	
 /* 	$('#cuitHidden').val(document.getElementById('cuit').value);
@@ -580,6 +626,9 @@ function compradorSelect(selectObject) {
 	
 });
  */
+ $(".btn-secondary").click(function(){
+	cantidades(); 
+ });
 $(".btn-dark").click(function(){
 	$('#auction').val("entregar");
 	//bootbox.alert("Total: $" + $("#total").val());

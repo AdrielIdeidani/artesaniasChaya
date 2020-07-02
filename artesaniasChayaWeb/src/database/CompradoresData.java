@@ -36,7 +36,7 @@ public class CompradoresData {
 				while(rs.next()) {
 						Comprador comp = new Comprador();
 						comp.setCodigoPostal(rs.getString("codigoPostal"));
-						comp.setCuit(rs.getInt("cuit"));
+						comp.setCuit((long)rs.getObject("cuit"));
 						comp.setTelefono(rs.getString("telefono"));
 						comp.setNombre(rs.getString("nombre"));
 						comp.setMail(rs.getString("mail"));
@@ -83,7 +83,7 @@ public class CompradoresData {
 						comp.setNombre(rs.getString("nombre"));
 						comp.setMail(rs.getString("mail"));
 						comp.setCodigoPostal(rs.getString("codigoPostal"));
-						comp.setCuit(rs.getInt("cuit"));
+						comp.setCuit((long)rs.getObject("cuit"));
 						comp.setDireccion(rs.getString("direccion"));
 						comp.setLocalidad(rs.getString("localidad"));
 						comp.setProvincia(rs.getString("provincia"));

@@ -176,6 +176,13 @@ $("#menu-toggle").click(function(e) {
           }	 
 	}
     });
+$('ul').click(function() 
+	    { 
+	<% miSesion.setAttribute("comprador", "0");
+	%>
+	    alert(<%=miSesion.getAttribute("comprador")%>);
+	    });
+    
 </script>
 </body>
 </html>
