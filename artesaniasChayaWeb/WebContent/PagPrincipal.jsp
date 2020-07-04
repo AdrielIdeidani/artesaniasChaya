@@ -91,7 +91,8 @@ ProductosData pd= new ProductosData();
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a target="iframeprincipal" href="Venta/Venta.jsp">
+                <% String dir ="Venta/Venta.jsp?cuit=&nombre=&telefono=&mail=&direccion=&localidad=&provincia=&codigoPostal=" ;%>
+                    <a target="iframeprincipal" href="<%=dir%>">
                        Venta
                     </a>
                 </li>
@@ -180,7 +181,7 @@ $('ul').click(function()
 	    { 
 	<% miSesion.setAttribute("comprador", "0");
 	%>
-	    alert(<%=miSesion.getAttribute("comprador")%>);
+	   
 	    });
     
 </script>

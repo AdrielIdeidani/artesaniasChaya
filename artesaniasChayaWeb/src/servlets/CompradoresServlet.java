@@ -48,10 +48,14 @@ public class CompradoresServlet extends HttpServlet {
 		else if(auction.contains("eliminar")) {
 			String resultado=lc.eliminar(user,contra,request.getParameter("aux"));
 			
-			response.sendRedirect("Compradores/compradores.jsp");
+			if(resultado==null) {
+				response.sendRedirect("Compradores/compradores.jsp");
+			}
+			else {
+				response.sendRedirect("Compradores/compradores.jsp?resultado="+resultado);
+			}
 		}
 		else if (auction.contains("venta")) {
-			System.out.println("venta");
 			Comprador comp= new Comprador();
 			try {
 				 comp = cd.getOne(user,contra,request.getParameter("aux"));
@@ -64,20 +68,20 @@ public class CompradoresServlet extends HttpServlet {
 			response.sendRedirect("Venta/Venta.jsp?id="+comp.getCuit()+"&nombre="+comp.getNombre()+"&direccion="+
 			comp.getDireccion()+"&localidad="+comp.getLocalidad()+"&provincia="+comp.getProvincia()+"&telefono="
 			+comp.getTelefono()+"&mail="+comp.getMail()+"&cuit="+comp.getCuit()+"&codigoPostal="+comp.getCodigoPostal());
-			
+		
 		}
 		else if (auction.contains("cambiarCompradorANulo")) {
 			String cuit="-1"; //-1 o 0
 			miSesion.setAttribute("comprador", cuit);
-			response.sendRedirect("Venta/Venta.jsp?cuit="+request.getParameter("cuit")+"&nombre="+
-			request.getParameter("nombre")+"&telefono="+
-			request.getParameter("telefono")+"&mail="+
-			request.getParameter("mail")+"&direccion="+
-			request.getParameter("direccion")+"&localidad="+
-			request.getParameter("localidad")+"&provincia="+
-			request.getParameter("provincia")+"&codigoPostal="+
-			request.getParameter("codigoPostal"));
-			
+//			response.sendRedirect("Venta/Venta.jsp?cuit="+request.getParameter("cuit")+"&nombre="+
+//			request.getParameter("nombre")+"&telefono="+
+//			request.getParameter("telefono")+"&mail="+
+//			request.getParameter("mail")+"&direccion="+
+//			request.getParameter("direccion")+"&localidad="+
+//			request.getParameter("localidad")+"&provincia="+
+//			request.getParameter("provincia")+"&codigoPostal="+
+//			request.getParameter("codigoPostal"));
+			response.sendRedirect("Venta/Venta.jsp?cuit=&nombre=&telefono=&mail=&direccion=&localidad=&provincia=&codigoPostal=");;
 		}
 		
 	}
@@ -96,11 +100,14 @@ public class CompradoresServlet extends HttpServlet {
 			String resultado=lc.agregar(user, contra,request.getParameter("id"), request.getParameter("nombre"), request.getParameter("telefono")
 					, request.getParameter("mail"), request.getParameter("direccion"),
 					request.getParameter("localidad"),request.getParameter("codigoPostal"), request.getParameter("provincia"));
+			
+
 			if(resultado==null) {
 				response.sendRedirect("Compradores/compradores.jsp");
 			}
 			else {
-				//REDIRECCIONAR CON EL ERROR
+				response.sendRedirect("Compradores/compradores.jsp?resultado="+resultado);
+
 			}
 			
 		}
@@ -116,6 +123,9 @@ public class CompradoresServlet extends HttpServlet {
 			
 					if(resultado==null) { 
 						response.sendRedirect("Compradores/compradores.jsp");
+					}
+					else {
+						response.sendRedirect("Compradores/compradores.jsp?resultado="+resultado);
 					}
 		}
 	}

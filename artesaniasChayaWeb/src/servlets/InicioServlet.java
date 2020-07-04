@@ -43,7 +43,7 @@ public class InicioServlet extends HttpServlet {
 			String cuit = "0";			
 			ArrayList<ProductoConAumentoPrecio> pr = new ArrayList<ProductoConAumentoPrecio>();
 			miSesion.setAttribute("comprador", cuit);
-			miSesion.setMaxInactiveInterval(900);//15 min antes de invalidad la sesion
+			miSesion.setMaxInactiveInterval(9000);//15 min antes de invalidad la sesion
 			miSesion.setAttribute("pedido", prod );
 			miSesion.setAttribute("precios", pr );
 			response.sendRedirect("PagPrincipal.jsp");

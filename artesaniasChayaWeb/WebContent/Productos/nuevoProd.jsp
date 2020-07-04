@@ -119,11 +119,11 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </select>
 
 
-<input type="text" id="id" name="id" class="form-control" placeholder="Id" >
+<input type="text" id="id" name="id" class="form-control" maxlength="40" placeholder="Id" >
 <br>
-<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" >
+<input type="text" id="nombre" name="nombre" class="form-control" maxlength="45" placeholder="Nombre" >
 <br>
-<input type="text" id="precio" name="precio" class="form-control" placeholder="Precio" >
+<input type="text" id="precio" name="precio" class="form-control"  placeholder="Precio" >
 <br>
 
 <input type="hidden" id="auction" name="auction" value="agregar">

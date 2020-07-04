@@ -97,8 +97,11 @@ table.dataTable thead .sorting_desc_disabled:before {
 	
 
 }	
-table#tablaProds{
-	background-color: red;}
+.table {
+	cursor:pointer;
+}
+/* table#tablaProds{
+	background-color: red;} */
 
 /* table#tablaProds {
 	width:200px;

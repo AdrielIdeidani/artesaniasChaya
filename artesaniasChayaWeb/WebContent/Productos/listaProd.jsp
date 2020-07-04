@@ -23,10 +23,12 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+
 </head>
 <body>
 
-<a href="nuevoProd.jsp"><button type="submit" class="btn btn-secondary" id="btnModificar" name="modificar">Añadir</button></a>
+<a href="nuevoProd.jsp"><button type="submit" class="btn btn-info" id="btnModificar" name="modificar">Añadir</button></a>
 <form id="formProd" action="../ProductosServlet" method="get" >
 
 <table class="table table-striped table-bordered table-sm" id="tabla">
@@ -77,6 +79,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 $(document).ready(function() {
     $('#tabla').DataTable( {
         "paging":   false,
+        "scrollY": '490px',
         //"ordering": false,
         "info":     false
     } );
@@ -90,14 +93,54 @@ $(".btn-primary").click(function() {
 
 })
 $(document).ready(function(){
+	const queryString = window.location.search;
 
-$(".btn-secondary").click(function() {
+	const urlParams = new URLSearchParams(queryString);
+
+	const page_type = urlParams.get('resultado');
+	
+	if(page_type!==null){
+		
+		
+	
+		bootbox.alert({
+		    size: "medium",
+		    title: "ERROR!",
+		    message: page_type,
+		    className: "bootboxError" //No Funciona
+		     
+		}).find('.modal-content').css({color: '#F00'});
+	}
+
+$(".btn-secondary").click(function(e) {
+	e.preventDefault();
 	 var $row = $(this).closest("tr");    // Find the row
 	  var $text = $row.find(".colClass").text(); // Find the text
 	  $('#aux').val($row.find(".colClass").text());
 		$('#auction').val("eliminar");
 		
-	
+		bootbox.confirm({
+		    message: "Eliminar Producto " + $text +"?" ,
+		    buttons: {
+		      
+		        cancel: {
+		            label: 'Cancelar',
+		            className: 'btn-danger '
+		        },
+		        confirm: {
+		            label: 'Eliminar',
+		            className: 'btn-success '
+		        }
+		    },
+		    callback: function (result) {
+		    	
+		    	if(result) {
+		 	
+ 	  		document.getElementById("formProd").submit();
+		    	}
+		    	
+		    } 
+		}); 
 	
 
 	

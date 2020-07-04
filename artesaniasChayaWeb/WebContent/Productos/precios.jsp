@@ -17,7 +17,10 @@
 <link href="../Css/PageInPanel.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+ 
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
@@ -28,7 +31,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <!-- <input type="search" id="idSearch" name="idSearch" onChange="idBusqueda()" list="id" placeholder="Busqueda por Id">
 <input type="search" id="nombreSearch" list="nombre"  name="nombreSearch" placeholder="Busqueda por Nombre " onchange="nombreBusqueda()"> -->
 
-<table class="table table-dark">
+<table id="tabla" class="table table-striped table-bordered table-sm "> <!-- table-dark -->
   <thead>
     <tr>
       <th scope="col">X</th>
@@ -65,6 +68,7 @@ if(precios!=null){
 
 
 <input type="submit" class="btn btn-primary" id="actualizar" value="Actualizar" style="float:right">
+<input type="submit" class="btn btn-success" id="lista" value="Listado Productos">
 <a href="seleccionarProductosCambioPrecio.jsp" class="btn btn-secondary" style="float:right">Agregar</a>
 <input type="hidden" id="auction" name="auction" value="">
 <input type="hidden" id="aux" name="aux" >
@@ -101,9 +105,19 @@ y a cuanto quedarian. Que se hagan todas las actualizaciones juntas cuando haga 
   
 </body>
 <script>
-
-
-
+$(document).ready(function(){
+$('#tabla').DataTable( {
+    "paging":   false,
+    "scrollY": '490px',
+    //"ordering": false,
+    "info":     false
+} );
+});
+$(".btn-success").click(function(){
+	$("#auction").val("lista");
+	
+	
+});
 $(".btn-primary").click(function(){
 	$("#auction").val("actualizar");
 	

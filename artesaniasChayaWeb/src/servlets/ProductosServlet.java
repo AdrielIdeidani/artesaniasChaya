@@ -29,14 +29,7 @@ public class ProductosServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
- public void destroy() {
-    	
-        try {
-    		C.close();
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    	}
-        }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -53,8 +46,12 @@ if (action.contains("eliminar")) {
 	String resultado=lp.borrar(user, contra, request.getParameter("aux"));
 	
 	
-	
+	if(resultado== null) {
 	response.sendRedirect("Productos/listaProd.jsp");
+	}
+	else {
+		response.sendRedirect("Productos/listaProd.jsp?resultado="+resultado);
+			}
 }//Fin del elimnar
 else if (action.contains("modificar")) {
 	response.sendRedirect("Productos/nuevoProd.jsp?idProducto="+request.getParameter("aux"));
@@ -79,8 +76,9 @@ else if (action.contains("modificar")) {
 		String user= miSesion.getAttribute("usuario").toString();
 		String contra =miSesion.getAttribute("contra").toString();
 		logicProductos lp = new logicProductos();
+		String resultado=null;
 		if (request.getParameter("auction").contains("agregar")) {
-			String resultado= lp.agregar(user,contra,
+			 resultado= lp.agregar(user,contra,
 					request.getParameter("id"),Double.parseDouble(request.getParameter("precio")),
 					request.getParameter("nombre"),request.getParameter("empresa"),request.getParameter("categoria"));
 		
@@ -88,13 +86,18 @@ else if (action.contains("modificar")) {
 			
 		}else if(request.getParameter("auction").contains("modificar")) {
 			
-			String resultado=lp.modificar(user,contra,
+			 resultado=lp.modificar(user,contra,
 					request.getParameter("id"),request.getParameter("nombre"),
 					request.getParameter("empresa"),request.getParameter("categoria"),request.getParameter("aux"));
 			
 		}
-		
-		response.sendRedirect("Productos/listaProd.jsp");
+		if (resultado==null) {
+			response.sendRedirect("Productos/listaProd.jsp");
+
+		}
+		else {
+		response.sendRedirect("Productos/listaProd.jsp?resultado="+resultado);
+		}
 	}
 
 }

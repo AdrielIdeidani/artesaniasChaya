@@ -18,6 +18,11 @@
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<style>
+form{
+line-height:0.7}
+</style>
 </head>
 <body>
 <div>
@@ -35,29 +40,31 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 		    
 		    %>
 <br>
-<h5 class="small">Cuit/Cuil</h5>
-<input type="text" id="id" name="id" class="form-control" placeholder="Id"  value=<%=comp.getCuit() %> >
+<div style="display:inline">
+<h5 class="small" ><b>Cuit/Cuil</b></h5>
+<input type="text" id="id" name="id" class="form-control" placeholder="Id"  maxlength="20"	value=<%=comp.getCuit() %> >
+</div>
 <br>
-<h5 class="small">Nombre</h5>
-<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value="<%=comp.getNombre() %>">
+<h5 class="small"><b>Nombre</b></h5>
+<input type="text" id="nombre" name="nombre" class="form-control" maxlength="45" placeholder="Nombre" value="<%=comp.getNombre() %>">
 <br>
-<h5 class="small">Direccion</h5>
-<input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" value="<%=comp.getDireccion() %>">
+<h5 class="small"><b>Direccion</b></h5>
+<input type="text" id="direccion" name="direccion" class="form-control" maxlength="45" placeholder="Direccion" value="<%=comp.getDireccion() %>">
 <br>
-<h5 class="small">Localidad</h5>
-<input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" value="<%=comp.getLocalidad() %>">
+<h5 class="small"><b>Localidad</b></h5>
+<input type="text" id="localidad" name="localidad" class="form-control" maxlength="45" placeholder="Localidad" value="<%=comp.getLocalidad() %>">
 <br>
-<h5 class="small">Codigo Postal</h5>
-<input type="text" id="codigoPostal" class="form-control" name="codigoPostal" placeholder="Codigo Postal" value="<%=comp.getCodigoPostal() %>">
+<h5 class="small"><b>Codigo Postal</b></h5>
+<input type="text" id="codigoPostal" class="form-control" name="codigoPostal" maxlength="45" placeholder="Codigo Postal" value="<%=comp.getCodigoPostal() %>">
 <br>
-<h5 class="small">Provincia</h5>
-<input type="text" id="provincia" name="provincia" class="form-control" placeholder="Provincia" value="<%=comp.getProvincia() %>">
+<h5 class="small"><b>Provincia</b></h5>
+<input type="text" id="provincia" name="provincia" class="form-control" maxlength="45" placeholder="Provincia" value="<%=comp.getProvincia() %>">
 <br>
-<h5 class="small">Telefono</h5>
-<input type="text" id="telefono" class="form-control" name="telefono" placeholder="Telefono" value="<%=comp.getTelefono() %>">
+<h5 class="small"><b>Telefono</b></h5>
+<input type="text" id="telefono" class="form-control" name="telefono" maxlength="45" placeholder="Telefono" value="<%=comp.getTelefono() %>">
 <br>
-<h5 class="small">Mail</h5>
-<input type="email" id="mail" class="form-control" name="mail" placeholder="Email" value="<%=comp.getMail() %>">
+<h5 class="small"><b>Mail</b></h5>
+<input type="email" id="mail" class="form-control" name="mail" maxlength="45" placeholder="Email" value="<%=comp.getMail() %>">
 <br>
 <input type="hidden" id="auction" name="auction" value="modificar">
 <input type="hidden" id="aux" name="aux" value= "<%=comp.getCuit() %>">
@@ -65,21 +72,21 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 <%} else {%>
 <br>
-<input type="text" id="id" name="id" class="form-control" placeholder="Cuit">
+<input type="text" id="id" name="id" maxlength="20" class="form-control" placeholder="Cuit">
 <br> 
-<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
+<input type="text" id="nombre" name="nombre" maxlength="45" class="form-control" placeholder="Nombre">
 <br>
-<input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion">
+<input type="text" id="direccion" name="direccion" maxlength="45"  class="form-control" placeholder="Direccion">
 <br>
-<input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad">
+<input type="text" id="localidad" name="localidad" maxlength="45" class="form-control" placeholder="Localidad">
 <br>
-<input type="text" id="codigoPostal" name="codigoPostal" class="form-control" placeholder="Codigo Postal">
+<input type="text" id="codigoPostal" name="codigoPostal" maxlength="45" class="form-control" placeholder="Codigo Postal">
 <br>
-<input type="text" id="provincia" name="provincia" class="form-control" placeholder="Provincia">
+<input type="text" id="provincia" name="provincia" maxlength="45" class="form-control" placeholder="Provincia">
 <br>
-<input type="text" id="telefono" class="form-control" name="telefono" placeholder="Telefono">
+<input type="text" id="telefono" class="form-control" maxlength="45" name="telefono" placeholder="Telefono">
 <br>
-<input type="email" id="mail" class="form-control" name="mail" placeholder="Mail">
+<input type="email" id="mail" class="form-control" maxlength="45" name="mail" placeholder="Mail">
 <br>
 <input type="hidden" id="auction" name="auction" value="agregar">
 <input type="submit" class="btn btn-primary" id="agregar" value="Agregar" style="float:right">

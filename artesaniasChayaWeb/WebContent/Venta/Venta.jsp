@@ -11,32 +11,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Artesanias Chaya</title>
-<style type="text/css">
+<!-- <style type="text/css">
 
-/* body{
-background: black;
-} */
 
+.table{cursor:pointer;}
 
 
  
-</style>
+</style> -->
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper-utils.js" ></script>
  
-
+<link href="Venta.css" rel="stylesheet" type="text/css"  />
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
  
-<link href="Venta.css" rel="stylesheet"> <!-- type="text/css"/> -->
 <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script> 
+
 </head>
 <body>
 <form  id="formCompradores" name="formCompradores" action="../CompradoresServlet" method="get">
@@ -413,6 +411,24 @@ if(ped!=null){
 </body>
 <script>
 $(document).ready(function() {
+	const queryString = window.location.search;
+
+	const urlParams = new URLSearchParams(queryString);
+
+	const page_type = urlParams.get('resultado');
+	
+	if(page_type!==null){
+		
+		
+	
+		bootbox.alert({
+		    size: "medium",
+		    title: "ERROR!",
+		    message: page_type,
+		    className: "bootboxError" //No Funciona
+		     
+		}).find('.modal-content').css({color: '#F00'});
+	}
 	
 	var value = "<%=cuit%>" ;
 	if(value>-1){
@@ -509,7 +525,7 @@ function mostrar(){
     	
  /*    	"filter": true,
     	"bFilter":true, */
-    	 "scrollY": '350px',
+    	 "scrollY": '390px',
 /*     	"scrollCollapse": true, 
  */        "paging":   false,
         "info":     false

@@ -7,7 +7,7 @@
   </welcome-file-list>
    <error-page>
                <error-code> 404</error-code>
-               <location> /ErrorRedirect.html </location > <!-- /"ErrorRedirect.html"  /AppExceptionHandler -->
+               <location>  /ErrorRedirect.html</location > <!-- /"ErrorRedirect.html"  /AppExceptionHandler -->
         </error-page> 
 
         <error-page>

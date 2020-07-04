@@ -19,6 +19,7 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import database.ProductosData;
 import entities.Producto;
 import entities.ProductoConAumentoPrecio;
+import logic.PresupuestoPDF;
 import logic.logicProductos;
 
 /**
@@ -107,6 +108,24 @@ public class PreciosServlet extends HttpServlet {
 				ArrayList<ProductoConAumentoPrecio> prec = new ArrayList<ProductoConAumentoPrecio>();
 				miSesion.setAttribute("precios", prec);
 			}
+			
+			
+		}
+		else if (action.contains("lista")) {
+			System.out.println("servlet lista");
+			System.out.println("servlet lista");
+			System.out.println("servlet lista");
+			System.out.println("servlet lista");
+			System.out.println("servlet lista");
+
+			PresupuestoPDF pdf = new PresupuestoPDF();
+			try {
+				pdf.crearLista(user,contra);
+			} catch (IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			
 			
 		}

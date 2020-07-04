@@ -23,10 +23,11 @@
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 </head>
 <body>
-<a href="agregarComp.jsp"><button type="submit" class="btn btn-secondary" id="btnModificar" name="modificar">Añadir</button></a>
-<form action="../CompradoresServlet" method="get" >
+<a href="agregarComp.jsp"><button type="submit" class="btn btn-info" id="btnModificar" name="modificar">Añadir</button></a>
+<form action="../CompradoresServlet" method="get" id="formCompradores">
 
 <table id="tabla" class="table table-striped table-bordered table-sm" style="width:100%">
 	<col style="width:13%">
@@ -49,6 +50,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
   </thead>
   <tbody>
 	<%
+	System.out.println(request.getParameter("resultado"));
 	CompradoresData pd= new CompradoresData();
 	ArrayList<Comprador> list = pd.getAll(session.getAttribute("usuario").toString()
 			,session.getAttribute("contra").toString()); 
@@ -78,12 +80,37 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </body>
 <script>
 
-$(".btn-secondary").click(function() {
+$(".btn-secondary").click(function(e) {
+	e.preventDefault();
 	 var $row = $(this).closest("tr");    // Find the row
 	  var $text = $row.find(".colClass").text(); // Find the text
 	 $('#aux').val($row.find(".colClass").text());
 	$('#auction').val("eliminar");
 
+	
+	bootbox.confirm({
+		    message: "Eliminar comprador " + $text +"?" ,
+		    buttons: {
+		      
+		        cancel: {
+		            label: 'Cancelar',
+		            className: 'btn-danger '
+		        },
+		        confirm: {
+		            label: 'Eliminar',
+		            className: 'btn-success '
+		        }
+		    },
+		    callback: function (result) {
+		    	
+		    	if(result) {
+		 	
+ 	  		document.getElementById("formCompradores").submit();
+		    	}
+		    	
+		    } 
+		}); 
+	
 	
 })
 
@@ -97,12 +124,31 @@ $(".btn-primary").click(function() {
 })
 
 $(document).ready(function(){
+	const queryString = window.location.search;
+
+	const urlParams = new URLSearchParams(queryString);
+
+	const page_type = urlParams.get('resultado');
+	
+	if(page_type!==null){
+		
+		
+	
+		bootbox.alert({
+		    size: "medium",
+		    title: "ERROR!",
+		    message: page_type,
+		    className: "bootboxError" //No Funciona
+		     
+		}).find('.modal-content').css({color: '#F00'});
+	}
 	$('#dtBasicExample').DataTable();
 	$('.dataTables_length').addClass('bs-select');
 
 	
     $('#tabla').DataTable( {
         "paging":   false,
+        "scrollY": '490px',
         //"ordering": false,
         "info":     false
     } );

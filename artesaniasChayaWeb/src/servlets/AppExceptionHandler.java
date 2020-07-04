@@ -72,8 +72,9 @@ public class AppExceptionHandler extends HttpServlet {
           //Rompe todo si ejecuto este codigo
           
           out.write("<br><br>");
-          out.write("<a href='../Inicio.jsp'>Home Page</a>");
+//          out.write("<a href='PagPrincipal.jsp'>Home Page</a>");
           out.write("</body></html>");
-          response.sendRedirect("Inicio.jsp");
+          
+          //response.sendRedirect("Inicio.jsp");
     }
 }

@@ -1,8 +1,6 @@
 /* @import url("/artesaniasChayaWeb/WebContent/Css/PageInPanel.css");
  */
-body{
-/* 	overflow: hidden !important;
- */}
+
 .modal-footer button {
   float:right;
   margin-left: 10px;
@@ -12,6 +10,9 @@ body{
 	color: white;
 	background-color: black;
 	
+}
+.table {
+	cursor:pointer;
 }
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,

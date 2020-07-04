@@ -83,15 +83,10 @@ public class VentaServlet extends HttpServlet {
 		localidad=request.getParameter("localidadHidden");
 		provincia=request.getParameter("provinciaHidden");
 		codigoPostal=request.getParameter("codigoPostalHidden");
-		System.out.println("cuit");
-		System.out.println(cuit);
-		System.out.println(cuit);
-		System.out.println(cuit);
-		System.out.println(cuit);
-		System.out.println(cuit);
+
 
 		String cantidades= request.getParameter("cantsHidden");
-
+		String resultado=null;
 		
 		String[] cants =	cantidades.split("\\s*,\\s*");
 		
@@ -132,7 +127,7 @@ public class VentaServlet extends HttpServlet {
 			if (aux.contentEquals("-1") ) {
 				String base ="9999";
 				nroComprador = base.concat(cuit);
-				String resultado= lc.agregarNulo(user, contra,
+				 resultado= lc.agregarNulo(user, contra,
 						nroComprador,nombre,telefono,mail, direccion, localidad, codigoPostal, provincia);
 				
 				System.out.println("Equal -1 (agregado a mano)");
@@ -158,12 +153,20 @@ public class VentaServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
+			if(nombre==null) nombre="--";
+			if(telefono==null) telefono="--";
+			if(mail==null) mail="--";
+			if(direccion==null) direccion="--";
+			if(localidad==null) localidad="--";
+			if(codigoPostal==null) codigoPostal="--";
+			if(provincia==null) provincia="--";
+
 			
 			double total= 0;
+			double totalSinDescuento=0;
 			for (Producto p:ped) {
 				total+= p.getCant()*p.getPrecio();
-				
+				 totalSinDescuento=total;
 			}
 			
 	
@@ -192,23 +195,23 @@ public class VentaServlet extends HttpServlet {
 		}
 		
 	
-		String resultado = lp.entregar(user,contra,ped,descuento,total,nroComprador);
+		resultado = lp.entregar(user,contra,ped,descuento,total,cuit);
 		if(Integer.parseInt(resultado)>-1 ) {
 			Presupuesto pres = new Presupuesto();
 			pres.setNro(Integer.parseInt(resultado));
 			pres.setNombre(nombre);
 			pres.setCodigoPostal(codigoPostal);
-			pres.setCuit(nroComprador);
+			pres.setCuit(cuit);
 			pres.setDireccion(direccion);
 			pres.setLocalidad(localidad);
 			pres.setMail(mail);
 			pres.setProvincia(provincia);
 			pres.setTelefono(telefono);
-			pres.setSubtotal(total);
+			pres.setSubtotal(totalSinDescuento);
 			pres.setDescuento(descuento);
 			pres.setProds(ped);
 			PresupuestoPDF p = new PresupuestoPDF();
-			p.crear(pres);
+			p.crearPresupuesto(pres);
 			
 			ped.clear();
 			miSesion.setAttribute("pedido", ped);
@@ -236,9 +239,15 @@ public class VentaServlet extends HttpServlet {
 			miSesion.setAttribute("pedido", ped);
 
 		}
-		response.sendRedirect("Venta/Venta.jsp?cuit="+cuit+"&nombre="+nombre+"&mail="+mail+
+		 if(resultado==null) {
+				response.sendRedirect("Venta/Venta.jsp?cuit="+cuit+"&nombre="+nombre+"&mail="+mail+
+						"&telefono="+telefono+"&direccion="+direccion+"&localidad="+localidad+"&provincia="+
+						provincia+"&codigoPostal="+codigoPostal);
+		 }
+		 
+		 else{ response.sendRedirect("Venta/Venta.jsp?cuit="+cuit+"&nombre="+nombre+"&mail="+mail+
 				"&telefono="+telefono+"&direccion="+direccion+"&localidad="+localidad+"&provincia="+
-				provincia+"&codigoPostal="+codigoPostal);
+				provincia+"&codigoPostal="+codigoPostal+"&resultado="+resultado);}
 
 	}
 }
