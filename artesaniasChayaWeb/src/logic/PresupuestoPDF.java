@@ -141,7 +141,7 @@ public class PresupuestoPDF {
 		comprador.add("\tProvincia: ");
 		comprador.add(pres.getProvincia());
 		comprador.add("\t\t");
-		comprador.add(String.valueOf(java.time.LocalDate.now()));
+		comprador.add(String.valueOf(pres.getFecha()));
 		doc.add(comprador.setBorder(new SolidBorder(1)));
 		
 		float[] columnWidths = {5, 2, 15,10,5};
@@ -176,10 +176,11 @@ public class PresupuestoPDF {
         doc.add(table);
       
         Paragraph footer = new Paragraph();
-        footer.add("Subtotal $"+pres.getSubtotal());
-        footer.add("\nDescuento $"+pres.getDescuento());
+       
+        footer.add("Subtotal $"+String.valueOf(pres.getSubtotal()));
+        footer.add("\nDescuento $"+String.valueOf(pres.getDescuento()));
         double total= pres.getSubtotal() -pres.getDescuento();
-        footer.add("\nTotal $"+total);
+        footer.add("\nTotal $"+String.valueOf( total));
 
 
 

@@ -21,6 +21,7 @@ public class logicPedidos {
 	
 	public String entregar(String user, String contra, ArrayList<Producto> ped,double descuento,double total,String idComprador) {
 	int idPedido=-100;
+	resultado=null;
 		try {
 			
 			 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
@@ -40,9 +41,9 @@ public class logicPedidos {
 				resultado= String.valueOf(idPedido);
 				}
 
-
+				System.out.println("idPedido " +idPedido);
 				pstmt.close();
-				 query = "insert into chaya.lineapresupuesto values (?,?,?);";
+				query = "insert into chaya.lineapresupuesto values (?,?,?);";
 				for(Producto p:ped) {
 					pstmt = C.prepareStatement(query);	
 					pstmt.setInt(1, idPedido );
@@ -52,6 +53,7 @@ public class logicPedidos {
 					
 					
 				}
+				System.out.println("crea las lineas del presupuesto");
 				pstmt.close(); 
 				 rs.close();		
 				 C.close();
@@ -60,6 +62,12 @@ public class logicPedidos {
 		
 		} catch (SQLException e) {
 			resultado="-1";
+			System.out.println("Error log pedidos");
+			System.out.println("Error log pedidos");
+			System.out.println("Error log pedidos");
+			System.out.println("Error log pedidos");
+
+			
 			e.printStackTrace();
 		}
 		

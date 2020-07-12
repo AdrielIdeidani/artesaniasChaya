@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,8 +54,21 @@ public class VentaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+		System.out.println("entra al doget");
+		HttpSession miSesion= request.getSession(false);
+		ArrayList<Presupuesto> presupuestos= (ArrayList)miSesion.getAttribute("presupuestos");
+		String aux = request.getParameter("aux");
+		Presupuesto presupuesto=null;
+		for(Presupuesto p:presupuestos) {
+			if(aux.contentEquals(String.valueOf(p.getNro()))) {
+				presupuesto=p;
+				break;
+			}
+		}
+		PresupuestoPDF pdf= new PresupuestoPDF();
+		pdf.crearPresupuesto(presupuesto);
+		response.sendRedirect("Reportes/VentasDelDia.jsp");
+		
 	
 	}
 
@@ -199,6 +213,7 @@ public class VentaServlet extends HttpServlet {
 		if(Integer.parseInt(resultado)>-1 ) {
 			Presupuesto pres = new Presupuesto();
 			pres.setNro(Integer.parseInt(resultado));
+			resultado=null;
 			pres.setNombre(nombre);
 			pres.setCodigoPostal(codigoPostal);
 			pres.setCuit(cuit);
@@ -210,6 +225,7 @@ public class VentaServlet extends HttpServlet {
 			pres.setSubtotal(totalSinDescuento);
 			pres.setDescuento(descuento);
 			pres.setProds(ped);
+			pres.setFecha(java.time.LocalDate.now());
 			PresupuestoPDF p = new PresupuestoPDF();
 			p.crearPresupuesto(pres);
 			

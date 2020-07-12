@@ -60,7 +60,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <br>
 
 <label for="Categoría">Categoría</label>
-<select id="categoria" name="categoria">
+<select id="categoria" name="categoria" required>
 <option value="<%=prod.getCategoria() %>"><%=prod.getCategoria() %></option>
 <% for(int i =0;i<listCategoriaExcept.size();i++){
 	%>
@@ -72,7 +72,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 </select>     
 <label for="Empresa">Empresa</label>
-<select id="empresa" name="empresa">
+<select id="empresa" name="empresa" required>
 <option value="<%=prod.getEmpresa()%>"><%=prod.getEmpresa() %></option>
 <% for(int i =0;i<listEmpresaExcept.size();i++){
 	%>
@@ -83,9 +83,9 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <option value="-1">Nueva Empresa</option>
 </select>
 <h5 class="small">Id</h5>
-<input type="text" id="id" name="id" class="form-control" placeholder="Id" value=<%= prod.getId().replace(prod.getCategoria(), "") %>>
+<input type="text" id="id" name="id" class="form-control" placeholder="Id" value="<%= prod.getId().replace(prod.getCategoria(), "") %>">
 <h5 class="small">Nombre</h5>
-<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value=<%=prod.getNombre() %>>
+<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value="<%=prod.getNombre() %>">
 
 <input type="hidden" id="auction" name="auction" value="modificar">
 <input type="hidden" id="aux" name="aux" value= <%=prod.getId() %>>
@@ -95,8 +95,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 	
 <label for="Categoría">Categoría</label>
-<select id="categoria" name="categoria">
-<option value="0">----</option>
+<select id="categoria" name="categoria" required>
+<option value="">----</option>
 <% for(int i =0;i<list.size();i++){
 	%>
 	<option value="<%=list.get(i) %>"><%=list.get(i) %></option>
@@ -107,8 +107,8 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 
 </select>     
 <label for="Empresa">Empresa</label>
-<select id="empresa" name="empresa">
-<option value="0">----</option>
+<select id="empresa" name="empresa" required>
+<option value="">----</option>
 <% for(int i =0;i<listEmp.size();i++){
 	%>
 	<option value="<%=listEmp.get(i) %>"><%=listEmp.get(i) %></option>
@@ -119,11 +119,11 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </select>
 
 
-<input type="text" id="id" name="id" class="form-control" maxlength="40" placeholder="Id" >
+<input type="text" id="id" name="id" class="form-control" maxlength="40" placeholder="Id" required >
 <br>
-<input type="text" id="nombre" name="nombre" class="form-control" maxlength="45" placeholder="Nombre" >
+<input type="text" id="nombre" name="nombre" class="form-control" maxlength="45" placeholder="Nombre" required>
 <br>
-<input type="text" id="precio" name="precio" class="form-control"  placeholder="Precio" >
+<input type="text" id="precio" name="precio" class="form-control"  placeholder="Precio" required>
 <br>
 
 <input type="hidden" id="auction" name="auction" value="agregar">

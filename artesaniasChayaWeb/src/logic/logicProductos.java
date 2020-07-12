@@ -171,15 +171,36 @@ public class logicProductos {
 				pstmt.close();
 				C.close();
 			} catch (SQLException e) {
-				resultado=e.getMessage();
+				System.out.println("error en el catch!");
+				resultado="Ya existe un producto con ese id!";
 				e.printStackTrace();
 			}
 		return resultado;
 	}
 	
 	public String modificar(String user, String contra, String codigo, 
-			String descripcion, String empresa, String categoria, String idViejo)  {
+			String descripcion, String empresa, String categoria, String idViejo)   {
 		resultado=null;
+		
+		ProductosData pd= new ProductosData();
+		ArrayList<Producto> prods;
+		try {
+			prods = pd.getAll(user, contra);
+			for (Producto p:prods) {
+				if(p.getId().contentEquals(categoria.concat(codigo))) {
+					resultado="Ya existe un producto con ese id";
+					break;
+					
+				}
+		}
+		}catch (SQLException e1) {
+			resultado="Otro error";
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+			
+		if(resultado==null) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			 C = DriverManager.getConnection("jdbc:mysql://localhost:3306/chaya?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
@@ -199,6 +220,7 @@ public class logicProductos {
 		catch (Exception e) {
 			resultado=e.getMessage();
 			e.printStackTrace();
+		}
 		}
 		return resultado;
 	}

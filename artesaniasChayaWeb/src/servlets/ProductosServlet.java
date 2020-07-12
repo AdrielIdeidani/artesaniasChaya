@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import logic.logicProductos;
 
 /**
@@ -76,26 +77,66 @@ else if (action.contains("modificar")) {
 		String user= miSesion.getAttribute("usuario").toString();
 		String contra =miSesion.getAttribute("contra").toString();
 		logicProductos lp = new logicProductos();
-		String resultado=null;
+		String resultado="";
+		boolean bandera =false;
 		if (request.getParameter("auction").contains("agregar")) {
-			 resultado= lp.agregar(user,contra,
-					request.getParameter("id"),Double.parseDouble(request.getParameter("precio")),
-					request.getParameter("nombre"),request.getParameter("empresa"),request.getParameter("categoria"));
+			String empresa= request.getParameter("empresa");
+			String categoria =request.getParameter("categoria");
+			String precio =request.getParameter("precio");
+			String nombre= request.getParameter("nombre");
+			String id=request.getParameter("id");
+			if(empresa.contentEquals("") || categoria.contentEquals("")) {
+				resultado=resultado.concat("\nFaltó asignar empresa y/o categoria!");
+				bandera=true;
+
+			}
+			
+				
+				if(nombre.contentEquals("")) {
+					resultado=resultado.concat("\nFalta asignar nombre al producto!");
+
+					bandera=true;
+
+				}
+			
+				 if(id.contentEquals("")) {
+					 resultado= resultado.concat("\nFalta asignar un id al producto!");
+						bandera=true;
+						
+
+				 }
+				 if(precio.contentEquals("")) {
+					 resultado=resultado.concat("\nAsigne un precio al producto");
+						bandera=true;
+
+				 }
+				if(bandera==false) {
+
+					resultado= lp.agregar(user,contra,id
+							,Double.parseDouble(precio),
+					nombre,empresa,categoria);
+					
+
+				}
 		
 			
 			
 		}else if(request.getParameter("auction").contains("modificar")) {
+			
+			
+			
 			
 			 resultado=lp.modificar(user,contra,
 					request.getParameter("id"),request.getParameter("nombre"),
 					request.getParameter("empresa"),request.getParameter("categoria"),request.getParameter("aux"));
 			
 		}
-		if (resultado==null) {
+		if (bandera==false && resultado==null) {
 			response.sendRedirect("Productos/listaProd.jsp");
 
 		}
 		else {
+
 		response.sendRedirect("Productos/listaProd.jsp?resultado="+resultado);
 		}
 	}

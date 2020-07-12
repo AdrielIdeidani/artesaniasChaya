@@ -19,6 +19,15 @@
 
  
 </style> -->
+<!-- <style>
+.modal-content2 {
+	height:210px;
+	  position: absolute;
+ 	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	}
+</style> -->
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -53,10 +62,6 @@ CompradoresData pd= new CompradoresData();
 
 String cuit = miSesion.getAttribute("comprador").toString();
 String nombreText,cuitText,telefonoText,mailText,direccionText,localidadText,provinciaText,codigoText;
-System.out.println(cuit);
-System.out.println(cuit);
-System.out.println(cuit);
-System.out.println(cuit);
 
 //Apenas carga o cuando ponemos en un comprador vacio
 
@@ -137,16 +142,8 @@ if (cuit.equals("0")){
 
 
 <%} %>
-<%-- <select class="form-control" onChange="compradorSelect(this)">
-<option value="<%=request.getParameter("nombre") %>"><%=request.getParameter("nombre") %></option>
 
-<%		for (Comprador comp:list){		%>
-<option value="<%=comp.getCuit()%>"><%=comp.getNombre() %></option>
-<%} %>
-<option value="comprador" >----</option>
-</select> --%>
 </div>
-<%-- <%} %> --%>
 <br>
 <div class="row" >
 <div class="col">
@@ -200,7 +197,8 @@ if (cuit.equals("0")){
 <div class="modal" id="modalDescuento">
 
 <div class="modal-dialog2">
-      <div class="modal-content2" style="width:600px;height:200px;">
+      <div class="modal-content2" style="width:600px;height:210px;  position: absolute;
+ 	top: 25%;	left: 25%;">
 
         <div class="modal-header2">
           <h4 class="modal-title2">Descuentos</h4>

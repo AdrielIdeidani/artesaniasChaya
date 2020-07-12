@@ -48,9 +48,13 @@ table.dataTable thead .sorting_desc_disabled:before {
 .modal-content2 {
 		/* position: relative; */
 	
+	  position: absolute;
+ 	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 	background-color:white;
- 	 left:10%; 
-  	padding:1px;
+/*  	 left:10%; 
+ */  	padding:1px;
     pointer-events: auto;
     background-clip: padding-box;
     border: 1px solid #006400;
@@ -119,3 +123,8 @@ overflow: auto;
 .table-wrapper-scroll-y {
 display: block;
 } 
+.collapse2{
+	background-color: #add8e6;
+	cursor:pointer;
+	color:black;
+}

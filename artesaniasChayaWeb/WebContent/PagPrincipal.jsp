@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Artesanias Chaya</title>
+<title>Distribuidora Chaya</title>
 <style>
 
 
@@ -117,7 +117,7 @@ ProductosData pd= new ProductosData();
                     <a href="Productos/compraProd.jsp" target="iframeprincipal">Compra a Proveedores</a>
                 </li> -->
                  <li>
-                    <a target="iframeprincipal" href="resumenVentas.jsp">Resumenes Facturas</a>
+                    <a target="iframeprincipal" href="Reportes/VentasDelDia.jsp">Resumenes Facturas</a>
                 </li>
                <!--   <li>
                     <a href="database.jsp" target="iframeprincipal" >Acceso DB</a>
@@ -141,7 +141,7 @@ ProductosData pd= new ProductosData();
 
 screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
                 <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
-		<button id="menu-toggle" class="btn btn-secondary"><i id="toggleIcon" class="fa fa-angle-double-down"></i> Toggle Menu <i class="fa fa-
+		<button id="menu-toggle" class="btn btn-secondary"><i id="toggleIcon" class="fa fa-angle-double-down"></i> Menu Principal <i class="fa fa-
 
 filter"></i></button>                
             </div>
@@ -177,8 +177,12 @@ $("#menu-toggle").click(function(e) {
           }	 
 	}
     });
+/* $( "#menu-toggle" ).mouseover(function() {
+	$( "#menu-toggle" ).click();
+	}); */
 $('ul').click(function() 
 	    { 
+	$( "#menu-toggle" ).click();
 	<% miSesion.setAttribute("comprador", "0");
 	%>
 	   

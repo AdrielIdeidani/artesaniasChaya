@@ -28,7 +28,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </head>
 <body>
 
-<a href="nuevoProd.jsp"><button type="submit" class="btn btn-info" id="btnModificar" name="modificar">Añadir</button></a>
+<a href="nuevoProd.jsp"><button type="submit" class="btn btn-info" style="position: absolute;" id="btnModificar" name="modificar">Añadir</button></a>
 <form id="formProd" action="../ProductosServlet" method="get" >
 
 <table class="table table-striped table-bordered table-sm" id="tabla">

@@ -52,13 +52,13 @@ table.dataTable thead .sorting_desc_disabled:before {
 		/* position: relative; */
 	
 	background-color:white;
- 	 left:10%; 
-  	padding:1px;
+/*  	 left:10%; 
+ */  	padding:1px;
     pointer-events: auto;
     background-clip: padding-box;
     border: 1px solid #006400;
     width:400px;
-    height:185px;
+    height:210px;
 /*   	padding-right: 10px;
  */} 
 .modal-footer2{

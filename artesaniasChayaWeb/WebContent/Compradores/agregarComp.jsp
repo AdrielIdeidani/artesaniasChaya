@@ -42,11 +42,11 @@ line-height:0.7}
 <br>
 <div style="display:inline">
 <h5 class="small" ><b>Cuit/Cuil</b></h5>
-<input type="text" id="id" name="id" class="form-control" placeholder="Id"  maxlength="20"	value=<%=comp.getCuit() %> >
+<input type="text" id="id" name="id" class="form-control" required placeholder="Id"  maxlength="20"	value=<%=comp.getCuit() %> >
 </div>
 <br>
 <h5 class="small"><b>Nombre</b></h5>
-<input type="text" id="nombre" name="nombre" class="form-control" maxlength="45" placeholder="Nombre" value="<%=comp.getNombre() %>">
+<input type="text" id="nombre" name="nombre" class="form-control" required maxlength="45" placeholder="Nombre" value="<%=comp.getNombre() %>">
 <br>
 <h5 class="small"><b>Direccion</b></h5>
 <input type="text" id="direccion" name="direccion" class="form-control" maxlength="45" placeholder="Direccion" value="<%=comp.getDireccion() %>">
@@ -72,9 +72,9 @@ line-height:0.7}
 
 <%} else {%>
 <br>
-<input type="text" id="id" name="id" maxlength="20" class="form-control" placeholder="Cuit">
+<input type="text" id="id" name="id" maxlength="20"  required class="form-control" placeholder="Cuit">
 <br> 
-<input type="text" id="nombre" name="nombre" maxlength="45" class="form-control" placeholder="Nombre">
+<input type="text" id="nombre" name="nombre" maxlength="45" required class="form-control" placeholder="Nombre">
 <br>
 <input type="text" id="direccion" name="direccion" maxlength="45"  class="form-control" placeholder="Direccion">
 <br>
