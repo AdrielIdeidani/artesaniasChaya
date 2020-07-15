@@ -111,8 +111,8 @@ ArrayList<Comprador> list = pd.getAll(session.getAttribute("usuario").toString()
 <%
 if (cuit.equals("0")){
 %>
-<select class="form-control" onChange="compradorSelect(this)">
-<option value="comprador" >Comprador:</option>
+<select class="form-control"  required onChange="compradorSelect(this)">
+<option  value="comprador">Comprador:</option>
 <%		for (Comprador comp:list){		%>
 <option value="<%=comp.getCuit()%>"><%=comp.getNombre() %></option>
 <%} %>

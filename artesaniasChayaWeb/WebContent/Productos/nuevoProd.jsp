@@ -83,7 +83,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 <option value="-1">Nueva Empresa</option>
 </select>
 <h5 class="small">Id</h5>
-<input type="text" id="id" name="id" class="form-control" placeholder="Id" value="<%= prod.getId().replace(prod.getCategoria(), "") %>">
+<input type="text" id="id" name="id" class="form-control" pattern=".{4,4}" placeholder="Id" value="<%= prod.getId().replace(prod.getCategoria(), "") %>">
 <h5 class="small">Nombre</h5>
 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value="<%=prod.getNombre() %>">
 
@@ -119,7 +119,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 </select>
 
 
-<input type="text" id="id" name="id" class="form-control" maxlength="40" placeholder="Id" required >
+<input type="text" id="id" name="id" class="form-control"pattern=".{4,4}" placeholder="Id" required >
 <br>
 <input type="text" id="nombre" name="nombre" class="form-control" maxlength="45" placeholder="Nombre" required>
 <br>

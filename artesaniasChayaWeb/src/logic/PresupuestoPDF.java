@@ -115,8 +115,8 @@ public class PresupuestoPDF {
 
 		pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new TextFooterEventHandler(doc));
 
-//		Image titulo = new Image(ImageDataFactory.create("src/TabaqueriaChaya.jpg"));
-//		doc.add(titulo);
+		Image titulo = new Image(ImageDataFactory.create("/artesaniasChayaWeb/WebContent/Imagenes/Corto.jpg"));
+		doc.add(titulo);
 //		
 		
 		
